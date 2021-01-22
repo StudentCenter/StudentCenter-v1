@@ -6,109 +6,93 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import * as React from 'react';
+import { View } from 'react-native';
+import { 
+  BottomNavigation, 
+  Text, 
+} from 'react-native-paper';
+import FabMore from './Screens/FabMore.js'
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const HomeRoute = () => 
+<>
+<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  <Text>home</Text>
+</View>
+<FabMore/>
+</>
+;
 
-const App: () => React$Node = () => {
+const CalendarRoute = () => 
+<>
+<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  <Text>calendar</Text>
+</View>
+<FabMore/>
+</>
+;
+
+const UserRoute = () => 
+<>
+<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  <Text>user</Text>
+</View>
+<FabMore/>
+</>
+;
+
+const PPDBRoute = () => 
+<>
+<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  <Text>PPDB</Text>
+</View>
+<FabMore/>
+</>
+;
+
+const EskulRoute = () => 
+<>
+<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  <Text>Eskul</Text>
+</View>
+<FabMore/>
+</>
+;
+
+
+
+function App() {
+  const [navigationIndex, setNavigationIndex] = React.useState(0)
+  const [navigationRoutes] = React.useState([
+    { key: 'home', title: 'Home', icon: 'home' },
+    { key: 'calendar', title: 'Calendar', icon: 'calendar-blank' },
+    { key: 'user', title: 'User', icon: 'account' },
+    { key: 'ppdb', title: 'PPDB', icon: require('./Asset/Image/library_add.png')},
+    { key: 'eskul', title: 'ESKUL', icon: require('./Asset/Image/mdi_basketball.png') },
+  ])
+
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+    <BottomNavigation
+      shifting={true}
+      labeled={false}
+      barStyle={{backgroundColor: '#FFFFFF'}}
+      activeColor="#2F80ED"
+      inactiveColor="#88A1C8"
+      navigationState={{ index: navigationIndex, routes: navigationRoutes }}
+      onIndexChange={index => setNavigationIndex(index)}
+      renderScene={ BottomNavigation.SceneMap({
+        home: HomeRoute,
+        calendar: CalendarRoute,
+        user: UserRoute,
+        ppdb: PPDBRoute,
+        eskul: EskulRoute,
+      })}
+    />
     </>
   );
-};
+}
 
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
 
-export default App;
+
+export default App
