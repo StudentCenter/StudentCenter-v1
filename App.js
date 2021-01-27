@@ -10,69 +10,41 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { 
   BottomNavigation, 
-  Text, 
 } from 'react-native-paper';
-import FabMore from './Screens/FabMore.js'
-
-const HomeRoute = () => 
-<>
-<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-  <Text>home</Text>
-</View>
-<FabMore/>
-</>
-;
-
-const CalendarRoute = () => 
-<>
-<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-  <Text>calendar</Text>
-</View>
-<FabMore/>
-</>
-;
-
-const UserRoute = () => 
-<>
-<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-  <Text>user</Text>
-</View>
-<FabMore/>
-</>
-;
-
-const PPDBRoute = () => 
-<>
-<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-  <Text>PPDB</Text>
-</View>
-<FabMore/>
-</>
-;
-
-const EskulRoute = () => 
-<>
-<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-  <Text>Eskul</Text>
-</View>
-<FabMore/>
-</>
-;
-
-
+import HeaderApp from './Screens/HeaderApp';
+import HomeScreen from './Screens/HomeScreen';
+import StudentAttandance from './Screens/StudentAttandance';
+import StudentData from './Screens/StudentData';
+import EkskulData from './Screens/EkskulData';
+import PPDBData from './Screens/PPDBData';
 
 function App() {
   const [navigationIndex, setNavigationIndex] = React.useState(0)
   const [navigationRoutes] = React.useState([
     { key: 'home', title: 'Home', icon: 'home' },
-    { key: 'calendar', title: 'Calendar', icon: 'calendar-blank' },
-    { key: 'user', title: 'User', icon: 'account' },
-    { key: 'ppdb', title: 'PPDB', icon: require('./Asset/Image/library_add.png')},
-    { key: 'eskul', title: 'ESKUL', icon: require('./Asset/Image/mdi_basketball.png') },
+    { key: 'studentattandance', title: 'StudentAttandance', icon: 'calendar-blank' },
+    { key: 'studentdata', title: 'StudentData', icon: 'account' },
+    { key: 'ppdbdata', title: 'PPDBData', icon: require('./Asset/Image/library_add.png')},
+    { key: 'ekskuldata', title: 'EkskulData', icon: require('./Asset/Image/mdi_basketball.png') },
   ])
+  const renderScene = ({ route, jumpTo }) => {
+    switch (route.key) {
+      case 'home':
+        return <HomeScreen jumpTo={jumpTo} />;
+      case 'studentattandance':
+        return <StudentAttandance jumpTo={jumpTo} />;
+      case 'studentdata':
+        return <StudentData jumpTo={jumpTo} />;
+      case 'ekskuldata':
+        return <EkskulData jumpTo={jumpTo} />;
+      case 'ppdbdata':
+        return <PPDBData jumpTo={jumpTo} />;
+    }
+  }
 
   return (
     <>
+    <HeaderApp/>
     <BottomNavigation
       shifting={true}
       labeled={false}
@@ -81,13 +53,7 @@ function App() {
       inactiveColor="#88A1C8"
       navigationState={{ index: navigationIndex, routes: navigationRoutes }}
       onIndexChange={index => setNavigationIndex(index)}
-      renderScene={ BottomNavigation.SceneMap({
-        home: HomeRoute,
-        calendar: CalendarRoute,
-        user: UserRoute,
-        ppdb: PPDBRoute,
-        eskul: EskulRoute,
-      })}
+      renderScene={renderScene}
     />
     </>
   );
