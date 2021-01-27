@@ -1,44 +1,56 @@
 import * as React from 'react';
 import { Appbar } from 'react-native-paper';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
-const HeaderApp = () => {
-
-  const _handleMore = () => console.log('Shown more');
-
+function HeaderApp ({navigation, previous}) {
   return (
-    <Appbar.Header
-        style={styles.header}
-    >
-      <Appbar.Content title="Title"/>
-      <Appbar.Action 
-        icon="bell"
-        onPress={_handleMore}
-        style={styles.bellIcon}
-      />
-      <Appbar.Action 
-        icon="magnify"
-        onPress={_handleMore}
-        style={styles.searchIcon}
-      />
-      <Appbar.Action 
-        icon="dots-vertical"
-        onPress={_handleMore} 
-      />
-    </Appbar.Header>
+    <>
+      <View>
+        <Appbar.Header
+            style={styles.header}
+        >
+          {previous ? 
+          <>
+          <Appbar.BackAction onPress={navigation.goBack}/>
+          <Text style={{fontSize: 17, fontWeight: 'bold', color: '#40537E'}}>Setting Profile</Text>
+          </>
+          :
+          <Appbar.Content title="Title"/>  
+          }
+          {!previous ?
+          <>
+          <Appbar.Action 
+            icon="bell"
+            style={styles.bellIcon}
+          />
+          <Appbar.Action 
+            icon="magnify"
+            style={styles.searchIcon}
+          />
+          <Appbar.Action 
+            icon="dots-vertical"
+            onPress={() => navigation.navigate('Setting')} 
+          />
+          </>
+          :
+          null
+        }
+        </Appbar.Header>
+      </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
     header: {
-        backgroundColor: '#ffffff',
+      backgroundColor: 'transparent',
     },
     searchIcon: {
-      marginRight: '-3%'
+      marginRight: '-3%',
     },
     bellIcon: {
-      marginRight: '-2%'
-    }
+      marginRight: '-2%',
+    },
 })
 
 

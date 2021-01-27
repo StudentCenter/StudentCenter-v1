@@ -7,54 +7,101 @@
  */
 
 import * as React from 'react';
-import { View } from 'react-native';
-import { 
-  BottomNavigation, 
-} from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import HeaderApp from './Screens/HeaderApp';
 import HomeScreen from './Screens/HomeScreen';
 import StudentAttandance from './Screens/StudentAttandance';
 import StudentData from './Screens/StudentData';
 import EkskulData from './Screens/EkskulData';
 import PPDBData from './Screens/PPDBData';
+import SettingScreen from './Screens/SettingScreen';
+
+function Home() {
+  const Tab = createBottomTabNavigator();
+
+  return(
+    <>
+    <Tab.Navigator
+      initialRouteName="Home"
+      tabBarOptions={{
+        activeTintColor: '#2F80ED',
+        inactiveTintColor: '#88A1C8',
+        showLabel: false
+      }}
+      >
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Student Attandance"
+        component={StudentAttandance}
+        options={{
+          tabBarLabel: 'Student Attandance',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="calendar-blank" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Student Data"
+        component={StudentData}
+        options={{
+          tabBarLabel: 'Student Data',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="PPDB"
+        component={PPDBData}
+        options={{
+          tabBarLabel: 'PPDB',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="file-plus" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Ekskul"
+        component={EkskulData}
+        options={{
+          tabBarLabel: 'Ekskul',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="basketball" color={color} size={size} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+    </>
+  )
+}
 
 function App() {
-  const [navigationIndex, setNavigationIndex] = React.useState(0)
-  const [navigationRoutes] = React.useState([
-    { key: 'home', title: 'Home', icon: 'home' },
-    { key: 'studentattandance', title: 'StudentAttandance', icon: 'calendar-blank' },
-    { key: 'studentdata', title: 'StudentData', icon: 'account' },
-    { key: 'ppdbdata', title: 'PPDBData', icon: require('./Asset/Image/library_add.png')},
-    { key: 'ekskuldata', title: 'EkskulData', icon: require('./Asset/Image/mdi_basketball.png') },
-  ])
-  const renderScene = ({ route, jumpTo }) => {
-    switch (route.key) {
-      case 'home':
-        return <HomeScreen jumpTo={jumpTo} />;
-      case 'studentattandance':
-        return <StudentAttandance jumpTo={jumpTo} />;
-      case 'studentdata':
-        return <StudentData jumpTo={jumpTo} />;
-      case 'ekskuldata':
-        return <EkskulData jumpTo={jumpTo} />;
-      case 'ppdbdata':
-        return <PPDBData jumpTo={jumpTo} />;
-    }
-  }
-
+  const Stack = createStackNavigator();
+  
   return (
     <>
-    <HeaderApp/>
-    <BottomNavigation
-      shifting={true}
-      labeled={false}
-      barStyle={{backgroundColor: '#FFFFFF'}}
-      activeColor="#2F80ED"
-      inactiveColor="#88A1C8"
-      navigationState={{ index: navigationIndex, routes: navigationRoutes }}
-      onIndexChange={index => setNavigationIndex(index)}
-      renderScene={renderScene}
-    />
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          header: (props) => <HeaderApp {...props} />,
+        }}>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Setting" component={SettingScreen}/>
+      </Stack.Navigator>
+    </NavigationContainer>
     </>
   );
 }
