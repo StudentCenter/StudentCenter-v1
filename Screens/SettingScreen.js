@@ -1,47 +1,51 @@
+/* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  SafeAreaView,
-  Image,
-} from 'react-native';
+import {StyleSheet, Text, View, ScrollView, Image, Switch} from 'react-native';
 import {Card} from 'react-native-paper';
 
 const SettingScreen = () => {
   return (
     <>
-      <SafeAreaView>
-        <ScrollView>
-          <View style={styles.container}>
-            {/* Box 1 */}
-            <Card style={styles.box}>
-              <Text>test1</Text>
-            </Card>
+      <ScrollView>
+        <View style={styles.container}>
+          {/* Box 1 */}
+          <Card style={styles.box}>
+            <Text>test1</Text>
+          </Card>
 
-            <Text style={styles.textmore}>More Setting</Text>
+          <Text style={styles.textmore}>More Setting</Text>
 
-            {/* Box 2 */}
-            <Card style={styles.box2}>
-              <View style>
-                <Image source={require('../Asset/Image/darkmode.png')} />
-              </View>
-            </Card>
+          {/* Box 2 */}
+          <Card style={styles.box2}>
+            <View style={styles.viewmore}>
+              <Image source={require('../Asset/Image/darkmode.png')} />
+              <Text
+                style={{
+                  marginTop: '7%',
+                  fontSize: 17,
+                  marginLeft: '20%',
+                  marginRight: '20%',
+                }}>
+                Dark Mode
+              </Text>
+              <Switch />
+            </View>
+          </Card>
 
-            {/* Text Version */}
-            <Text style={styles.version}>App V1.1 Beta</Text>
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+          <Switch />
+
+          {/* Text Version */}
+          <Text style={styles.version}>App V1.1 Beta</Text>
+        </View>
+      </ScrollView>
     </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
-    backgroundColor: '#ffffff',
+    flex: 1,
+    backgroundColor: 'white',
   },
   box: {
     backgroundColor: 'white',
@@ -73,6 +77,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: '10%',
     fontWeight: 'bold',
+    paddingBottom: '10%',
   },
   textmore: {
     fontSize: 15,
@@ -83,6 +88,7 @@ const styles = StyleSheet.create({
   },
   viewmore: {
     flexDirection: 'row',
+    padding: 15,
   },
 });
 
