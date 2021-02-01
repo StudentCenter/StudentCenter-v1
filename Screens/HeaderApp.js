@@ -11,8 +11,7 @@ function HeaderApp({navigation, previous}) {
           {previous ? (
             <>
               <Appbar.BackAction onPress={navigation.goBack} />
-              <Text
-                style={{fontSize: 17, fontWeight: 'bold', color: '#40537E'}}>
+              <Text style={{fontSize: 17, fontWeight: 'bold', color: 'black'}}>
                 Setting Profile
               </Text>
             </>
