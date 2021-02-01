@@ -11,7 +11,6 @@ const HomeScreen = () => {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: '#ffffff',
         }}>
         <Text>home</Text>
       </View>

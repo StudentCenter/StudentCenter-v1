@@ -6,12 +6,12 @@ import {StyleSheet, Text, View} from 'react-native';
 function HeaderApp({navigation, previous}) {
   return (
     <>
-      <View style={{backgroundColor: '#ffffff'}}>
-        <Appbar.Header style={styles.header}>
+      <View>
+        <Appbar.Header>
           {previous ? (
             <>
               <Appbar.BackAction onPress={navigation.goBack} />
-              <Text style={{fontSize: 17, fontWeight: 'bold', color: 'black'}}>
+              <Text style={{fontSize: 17, fontWeight: 'bold'}}>
                 Setting Profile
               </Text>
             </>
@@ -35,9 +35,6 @@ function HeaderApp({navigation, previous}) {
 }
 
 const styles = StyleSheet.create({
-  header: {
-    backgroundColor: 'transparent',
-  },
   searchIcon: {
     marginRight: '-3%',
   },

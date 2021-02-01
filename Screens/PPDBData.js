@@ -11,7 +11,6 @@ const PPDBData = () => {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: '#ffffff',
         }}>
         <Text>PPDB Data</Text>
       </View>

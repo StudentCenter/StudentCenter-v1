@@ -9,30 +9,83 @@ import {
   Switch,
   TouchableOpacity,
 } from 'react-native';
-import {Card} from 'react-native-paper';
+import {Card, TouchableRipple, useTheme} from 'react-native-paper';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import {AuthContext} from '../components/context';
 
 const SettingScreen = () => {
+  const paperTheme = useTheme();
+  const {toggleTheme} = React.useContext(AuthContext);
   return (
-    <>
-      <ScrollView style={{backgroundColor: 'white'}}>
-        <View style={styles.container}>
-          {/* Box 1 */}
-          <Card style={styles.box}>
-            <Text style={{textAlign: 'center', marginTop: '30%'}}>test1</Text>
-          </Card>
+    <ScrollView>
+      <View style={styles.container}>
+        {/* Box 1 */}
+        <Card style={styles.box}>
+          <Text style={{textAlign: 'center', marginTop: '30%'}}>test1</Text>
+        </Card>
 
-          <Text style={styles.textmore}>More Setting</Text>
+        <Text style={styles.textmore}>More Setting</Text>
 
-          {/* Box 2 */}
-          <Card style={styles.box2}>
+        {/* Box 2 */}
+        <Card style={styles.box2}>
+          <View style={styles.viewmore}>
+            {/* Dark mode menu */}
+            <Image
+              source={require('../Asset/Image/darkmode.png')}
+              style={styles.image}
+            />
+            <Text
+              style={{
+                marginTop: '6%',
+                fontSize: 15,
+                textAlign: 'center',
+                marginLeft: 50,
+                fontWeight: 'bold',
+              }}>
+              Dark Mode
+            </Text>
+            <Switch
+              style={{
+                marginLeft: 50,
+              }}
+              value={paperTheme.dark}
+              onValueChange={() => {
+                toggleTheme();
+              }}
+            />
+          </View>
+
+          <View style={styles.viewmore}>
+            {/* Notification menu */}
+            <Image
+              source={require('../Asset/Image/notif.png')}
+              style={styles.image}
+            />
+            <Text
+              style={{
+                marginTop: '6%',
+                fontSize: 15,
+                textAlign: 'center',
+                marginLeft: 50,
+                fontWeight: 'bold',
+              }}>
+              Notification
+            </Text>
+            <Switch
+              style={{
+                marginLeft: 40,
+              }}
+            />
+          </View>
+
+          <TouchableOpacity>
             <View style={styles.viewmore}>
-              {/* Dark mode menu */}
+              {/* Logout menu */}
               <Image
-                source={require('../Asset/Image/darkmode.png')}
+                source={require('../Asset/Image/logout.png')}
                 style={styles.image}
               />
               <Text
@@ -41,82 +94,32 @@ const SettingScreen = () => {
                   fontSize: 15,
                   textAlign: 'center',
                   marginLeft: 50,
+                  marginRight: 70,
                   fontWeight: 'bold',
                 }}>
-                Dark Mode
+                Logout
               </Text>
-              <Switch
-                style={{
-                  marginLeft: 50,
-                }}
-              />
-            </View>
-
-            <View style={styles.viewmore}>
-              {/* Notification menu */}
               <Image
-                source={require('../Asset/Image/notif.png')}
-                style={styles.image}
-              />
-              <Text
-                style={{
-                  marginTop: '6%',
-                  fontSize: 15,
-                  textAlign: 'center',
-                  marginLeft: 50,
-                  fontWeight: 'bold',
-                }}>
-                Notification
-              </Text>
-              <Switch
-                style={{
-                  marginLeft: 40,
-                }}
+                source={require('../Asset/Image/arrow_right.png')}
+                style={styles.arrowlogout}
               />
             </View>
+          </TouchableOpacity>
+        </Card>
 
-            <TouchableOpacity>
-              <View style={styles.viewmore}>
-                {/* Logout menu */}
-                <Image
-                  source={require('../Asset/Image/logout.png')}
-                  style={styles.image}
-                />
-                <Text
-                  style={{
-                    marginTop: '6%',
-                    fontSize: 15,
-                    textAlign: 'center',
-                    marginLeft: 50,
-                    marginRight: 70,
-                    fontWeight: 'bold',
-                  }}>
-                  Logout
-                </Text>
-                <Image
-                  source={require('../Asset/Image/arrow_right.png')}
-                  style={styles.arrowlogout}
-                />
-              </View>
-            </TouchableOpacity>
-          </Card>
-
-          {/* Text Version */}
-          <Text style={styles.version}>App V1.1 Beta</Text>
-        </View>
-      </ScrollView>
-    </>
+        {/* Text Version */}
+        <Text style={styles.version}>App V1.1 Beta</Text>
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
     marginTop: 15,
   },
   box: {
-    backgroundColor: 'white',
     height: hp('40%'),
     width: wp('90%'),
     marginLeft: '5%',
@@ -128,7 +131,6 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   box2: {
-    backgroundColor: 'white',
     height: hp('45%'),
     width: wp('90%'),
     marginLeft: '5%',

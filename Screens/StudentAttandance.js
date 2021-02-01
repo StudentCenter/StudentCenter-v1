@@ -11,7 +11,6 @@ const StudentAttandance = () => {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: '#ffffff',
         }}>
         <Text>Student Attandance</Text>
       </View>
