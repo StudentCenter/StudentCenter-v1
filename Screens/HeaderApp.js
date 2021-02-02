@@ -1,17 +1,26 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import {Appbar} from 'react-native-paper';
+import {Appbar, useTheme} from 'react-native-paper';
 import {StyleSheet, Text, View} from 'react-native';
 
 function HeaderApp({navigation, previous}) {
+  const paperTheme = useTheme();
   return (
     <>
       <View>
         <Appbar.Header>
           {previous ? (
             <>
-              <Appbar.BackAction onPress={navigation.goBack} />
-              <Text style={{fontSize: 17, fontWeight: 'bold'}}>
+              <Appbar.BackAction
+                onPress={navigation.goBack}
+                color={paperTheme.colors.text}
+              />
+              <Text
+                style={{
+                  fontSize: 17,
+                  fontWeight: 'bold',
+                  color: paperTheme.colors.text,
+                }}>
                 Setting Profile
               </Text>
             </>
@@ -20,11 +29,20 @@ function HeaderApp({navigation, previous}) {
           )}
           {!previous ? (
             <>
-              <Appbar.Action icon="bell" style={styles.bellIcon} />
-              <Appbar.Action icon="magnify" style={styles.searchIcon} />
+              <Appbar.Action
+                icon="bell"
+                style={styles.bellIcon}
+                color={paperTheme.colors.text}
+              />
+              <Appbar.Action
+                icon="magnify"
+                style={styles.searchIcon}
+                color={paperTheme.colors.text}
+              />
               <Appbar.Action
                 icon="dots-vertical"
                 onPress={() => navigation.navigate('Setting')}
+                color={paperTheme.colors.text}
               />
             </>
           ) : null}

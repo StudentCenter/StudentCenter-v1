@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -123,6 +124,8 @@ function App() {
     colors: {
       ...NavigationDefaultTheme.colors,
       ...PaperDefaultTheme.colors,
+      background: '#FFFFFF',
+      text: '#000000',
     },
   };
 
@@ -133,6 +136,8 @@ function App() {
     colors: {
       ...NavigationDarkTheme.colors,
       ...PaperDarkTheme.colors,
+      background: '#121212',
+      text: '#FFFFFF',
     },
   };
 

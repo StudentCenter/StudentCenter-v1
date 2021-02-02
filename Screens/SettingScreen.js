@@ -9,16 +9,18 @@ import {
   Switch,
   TouchableOpacity,
 } from 'react-native';
-import {Card, TouchableRipple, useTheme} from 'react-native-paper';
+import {Card, useTheme} from 'react-native-paper';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import {AuthContext} from '../components/context';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const SettingScreen = () => {
   const paperTheme = useTheme();
   const {toggleTheme} = React.useContext(AuthContext);
+  console.log(paperTheme.dark);
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -27,7 +29,16 @@ const SettingScreen = () => {
           <Text style={{textAlign: 'center', marginTop: '30%'}}>test1</Text>
         </Card>
 
-        <Text style={styles.textmore}>More Setting</Text>
+        <Text
+          style={{
+            fontSize: 15,
+            fontWeight: 'bold',
+            marginTop: '5%',
+            color: paperTheme.colors.text,
+            marginLeft: '5%',
+          }}>
+          More Setting
+        </Text>
 
         {/* Box 2 */}
         <Card style={styles.box2}>
@@ -44,6 +55,7 @@ const SettingScreen = () => {
                 textAlign: 'center',
                 marginLeft: 50,
                 fontWeight: 'bold',
+                color: paperTheme.colors.text,
               }}>
               Dark Mode
             </Text>
@@ -71,6 +83,7 @@ const SettingScreen = () => {
                 textAlign: 'center',
                 marginLeft: 50,
                 fontWeight: 'bold',
+                color: paperTheme.colors.text,
               }}>
               Notification
             </Text>
@@ -94,15 +107,24 @@ const SettingScreen = () => {
                   fontSize: 15,
                   textAlign: 'center',
                   marginLeft: 50,
-                  marginRight: 70,
+                  marginRight: 65,
                   fontWeight: 'bold',
+                  color: paperTheme.colors.text,
                 }}>
                 Logout
               </Text>
-              <Image
+
+              <MaterialCommunityIcons
+                name="arrow-right-drop-circle"
+                color={paperTheme.colors.text}
+                size={30}
+                style={{marginTop: 15, marginLeft: 15}}
+              />
+
+              {/* <Image
                 source={require('../Asset/Image/arrow_right.png')}
                 style={styles.arrowlogout}
-              />
+              /> */}
             </View>
           </TouchableOpacity>
         </Card>
@@ -149,13 +171,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingBottom: '10%',
   },
-  textmore: {
-    fontSize: 15,
-    fontWeight: 'bold',
-    color: 'black',
-    marginTop: '5%',
-    marginLeft: '5%',
-  },
   viewmore: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -171,6 +186,7 @@ const styles = StyleSheet.create({
     height: 30,
     marginTop: 15,
     marginLeft: '5%',
+    color: 'white',
   },
 });
 
