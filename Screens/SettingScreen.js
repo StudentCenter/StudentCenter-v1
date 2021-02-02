@@ -130,7 +130,17 @@ const SettingScreen = () => {
         </Card>
 
         {/* Text Version */}
-        <Text style={styles.version}>App V1.1 Beta</Text>
+        <Text
+          style={{
+            fontSize: 12,
+            textAlign: 'center',
+            marginTop: '15%',
+            fontWeight: 'bold',
+            paddingBottom: '10%',
+            color: paperTheme.colors.text,
+          }}>
+          App V1.1 Beta
+        </Text>
       </View>
     </ScrollView>
   );
@@ -163,13 +173,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 25,
     shadowRadius: 15,
     elevation: 5,
-  },
-  version: {
-    fontSize: 12,
-    textAlign: 'center',
-    marginTop: '15%',
-    fontWeight: 'bold',
-    paddingBottom: '10%',
   },
   viewmore: {
     flexDirection: 'row',

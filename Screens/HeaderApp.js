@@ -8,7 +8,7 @@ function HeaderApp({navigation, previous}) {
   return (
     <>
       <View>
-        <Appbar.Header>
+        <Appbar.Header style={{backgroundColor: 'transparent'}} >
           {previous ? (
             <>
               <Appbar.BackAction
@@ -25,7 +25,7 @@ function HeaderApp({navigation, previous}) {
               </Text>
             </>
           ) : (
-            <Appbar.Content title="Title" />
+            <Appbar.Content title="Title" color={paperTheme.colors.text} />
           )}
           {!previous ? (
             <>
