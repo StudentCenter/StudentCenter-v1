@@ -6,8 +6,8 @@ import {
   View,
   ScrollView,
   Image,
-  Switch,
   TouchableOpacity,
+  Switch,
 } from 'react-native';
 import {Card, useTheme} from 'react-native-paper';
 import {
@@ -31,7 +31,7 @@ const SettingScreen = () => {
 
         <Text
           style={{
-            fontSize: 15,
+            fontSize: wp('3.5%'),
             fontWeight: 'bold',
             marginTop: '5%',
             color: paperTheme.colors.text,
@@ -51,9 +51,9 @@ const SettingScreen = () => {
             <Text
               style={{
                 marginTop: '6%',
-                fontSize: 15,
+                fontSize: wp('4%'),
                 textAlign: 'center',
-                marginLeft: 50,
+                marginLeft: wp('15%'),
                 fontWeight: 'bold',
                 color: paperTheme.colors.text,
               }}>
@@ -61,12 +61,15 @@ const SettingScreen = () => {
             </Text>
             <Switch
               style={{
-                marginLeft: 50,
+                marginLeft: wp('17%'),
+                borderColor: 'black',
               }}
               value={paperTheme.dark}
               onValueChange={() => {
                 toggleTheme();
               }}
+              thumbColor={paperTheme.dark ? '#ffffff' : '#000000'}
+              trackColor={{false: '#B2B2B2', true: '#000000'}}
             />
           </View>
 
@@ -79,9 +82,9 @@ const SettingScreen = () => {
             <Text
               style={{
                 marginTop: '6%',
-                fontSize: 15,
+                fontSize: wp('4%'),
                 textAlign: 'center',
-                marginLeft: 50,
+                marginLeft: wp('15%'),
                 fontWeight: 'bold',
                 color: paperTheme.colors.text,
               }}>
@@ -89,7 +92,7 @@ const SettingScreen = () => {
             </Text>
             <Switch
               style={{
-                marginLeft: 40,
+                marginLeft: wp('15.5%'),
               }}
             />
           </View>
@@ -104,10 +107,9 @@ const SettingScreen = () => {
               <Text
                 style={{
                   marginTop: '6%',
-                  fontSize: 15,
+                  fontSize: wp('4%'),
                   textAlign: 'center',
-                  marginLeft: 50,
-                  marginRight: 65,
+                  marginLeft: wp('15%'),
                   fontWeight: 'bold',
                   color: paperTheme.colors.text,
                 }}>
@@ -118,13 +120,8 @@ const SettingScreen = () => {
                 name="arrow-right-drop-circle"
                 color={paperTheme.colors.text}
                 size={30}
-                style={{marginTop: 15, marginLeft: 15}}
+                style={{marginTop: hp('2%'), marginLeft: wp('26%')}}
               />
-
-              {/* <Image
-                source={require('../Asset/Image/arrow_right.png')}
-                style={styles.arrowlogout}
-              /> */}
             </View>
           </TouchableOpacity>
         </Card>
@@ -132,9 +129,9 @@ const SettingScreen = () => {
         {/* Text Version */}
         <Text
           style={{
-            fontSize: 12,
+            fontSize: wp('3%'),
             textAlign: 'center',
-            marginTop: '15%',
+            marginTop: hp('5%'),
             fontWeight: 'bold',
             paddingBottom: '10%',
             color: paperTheme.colors.text,
@@ -176,13 +173,14 @@ const styles = StyleSheet.create({
   },
   viewmore: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    padding: 15,
-    marginTop: 5,
+    padding: wp('4%'),
+    marginTop: hp('1.2%'),
+    marginLeft: wp('1%'),
   },
   image: {
-    width: 60,
-    height: 60,
+    width: wp('16%'),
+    height: hp('9'),
+    borderRadius: 20,
   },
   arrowlogout: {
     width: 30,
