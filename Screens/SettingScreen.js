@@ -94,6 +94,8 @@ const SettingScreen = () => {
               style={{
                 marginLeft: wp('15.5%'),
               }}
+              thumbColor={paperTheme.dark ? '#ffffff' : '#000000'}
+              trackColor={{false: '#B2B2B2', true: '#000000'}}
             />
           </View>
 
@@ -178,7 +180,7 @@ const styles = StyleSheet.create({
     marginLeft: wp('1%'),
   },
   image: {
-    width: wp('16%'),
+    width: wp('17'),
     height: hp('9'),
     borderRadius: 20,
   },
