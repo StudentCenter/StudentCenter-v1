@@ -10,6 +10,27 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 const StudentData = () => {
   const paperTheme = useTheme();
+  const [datasiswa, SetDataSiswa] = React.useState('');
+  // const API_URL = `http://localhost:8000`;
+
+  const fetchSiswa = async () => {
+    try {
+      const data = await fetch(`http://10.0.2.2:8000/student`, {
+        method: 'GET',
+      });
+      const resp = await data.json();
+      console.log(resp.result);
+      SetDataSiswa(resp.result);
+    } catch (error) {
+      console.log(error);
+      alert(error);
+    }
+  }
+
+  React.useEffect(() => {
+    fetchSiswa()
+  }, [])
+
   return (
     <>
       <ScrollView>
@@ -22,6 +43,7 @@ const StudentData = () => {
           />
           <Card
             style={{
+              marginLeft: 10,
               width: wp('20%'),
               shadowColor: '#FFFFFF',
               borderRadius: 15,
@@ -44,36 +66,19 @@ const StudentData = () => {
 
         {/* View Data Siswa */}
         <View style={styles.container}>
-          <Card style={styles.colums}>
-            <Card style={styles.images} />
-          </Card>
-          <Card style={styles.colums}>
-            <Card style={styles.images} />
-          </Card>
-          <Card style={styles.colums}>
-            <Card style={styles.images} />
-          </Card>
-          <Card style={styles.colums}>
-            <Card style={styles.images} />
-          </Card>
-          <Card style={styles.colums}>
-            <Card style={styles.images} />
-          </Card>
-          <Card style={styles.colums}>
-            <Card style={styles.images} />
-          </Card>
-          <Card style={styles.colums}>
-            <Card style={styles.images} />
-          </Card>
-          <Card style={styles.colums}>
-            <Card style={styles.images} />
-          </Card>
-          <Card style={styles.colums}>
-            <Card style={styles.images} />
-          </Card>
-          <Card style={styles.colums}>
-            <Card style={styles.images} />
-          </Card>
+          {datasiswa.length > 0 ? 
+          datasiswa.map((item) => {
+            return (
+            <Card style={styles.colums} key={item.id}>
+              <Card style={styles.images} />
+              <Text>{item.nama}</Text>
+            </Card>
+
+            )
+          })
+          :
+          <Text>No Data In Here!</Text>
+        }
         </View>
       </ScrollView>
       <FAB
