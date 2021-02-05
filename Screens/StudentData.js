@@ -11,7 +11,6 @@ import {
   Card, 
   useTheme, 
   ActivityIndicator,
-  Portal,
   TouchableRipple
 } from 'react-native-paper';
 import {
@@ -31,7 +30,7 @@ const StudentData = () => {
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
   
-  const API_URL = `http://10.0.2.2:8000`;
+  const API_URL = `http://localhost:8000`;
 
   const fetchSiswa = async () => {
     try {
@@ -68,7 +67,7 @@ const StudentData = () => {
             <Card
               style={{
                 marginLeft: 10,
-                width: wp('20%'),
+                width: wp('22%'),
                 shadowColor: '#FFFFFF',
                 borderRadius: 15,
                 shadowOffset: {width: 0, height: 2},
@@ -81,7 +80,7 @@ const StudentData = () => {
                   marginTop: wp('1%'),
                   marginLeft: wp('2.5%'),
                   fontWeight: 'bold',
-                  fontSize: 15,
+                  fontSize: wp('3.5%'),
                 }}>
                 XII RPL 1
               </Text>
@@ -94,7 +93,6 @@ const StudentData = () => {
             datasiswa.map((item) => {
               return (
                 <Card style={styles.colums} key={item.id}>
-                  <TouchableRipple onPress={showModal}>
                     <View style={styles.row}>
                       <Card style={styles.images} />
                       <View style={styles.textcard}>
@@ -111,14 +109,20 @@ const StudentData = () => {
                           <Text>Null</Text>
                         }
                       </View>
-                      <MaterialCommunityIcons
-                        name="arrow-right-drop-circle"
-                        color={paperTheme.colors.text}
-                        size={30}
-                        style={{marginTop: hp('3%'), position: 'absolute', right: 20}}
-                      />
+                      <TouchableRipple 
+                      onPress={showModal} 
+                      style={{
+                        marginTop: hp('2.5%'), 
+                        position: 'absolute', 
+                        right: wp('4%')
+                      }}>
+                        <MaterialCommunityIcons
+                          name="arrow-right-drop-circle"
+                          color={paperTheme.colors.text}
+                          size={30}
+                        />
+                      </TouchableRipple>
                     </View>
-                  </TouchableRipple>
                 </Card>
               )
             })
@@ -136,7 +140,7 @@ const StudentData = () => {
         />
 
         {/* Modal Detail Siswa */}
-        <Portal>
+        <View>
           <Modal 
           isVisible={visible} 
           onBackdropPress={hideModal} 
@@ -148,10 +152,12 @@ const StudentData = () => {
             marginBottom: wp('15%'),
             marginLeft: wp('5%'),
           }}
+          animationInTiming={500}
+          animationOutTiming={500}
           >
             <Text style={{textAlign: 'center'}}>show modal</Text>
           </Modal>
-        </Portal>
+        </View>
       </>
     );
   } else {
@@ -193,8 +199,8 @@ const styles = StyleSheet.create({
   },
   images: {
     backgroundColor: '#C4C4C4',
-    width: wp('18%'),
-    height: hp('9.5%'),
+    width: wp('17.5%'),
+    height: hp('10%'),
     borderRadius: 15,
   },
   containersort: {
@@ -205,8 +211,8 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-    marginTop: wp('2.5%'),
-    marginLeft: wp('2.5%'),
+    marginTop: wp('1.5%'),
+    marginLeft: wp('2%'),
   },
   namasiswa: {
     marginTop: wp('2%'),
