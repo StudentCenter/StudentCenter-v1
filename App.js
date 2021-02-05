@@ -126,6 +126,7 @@ function App() {
       ...PaperDefaultTheme.colors,
       background: '#FFFFFF',
       text: '#000000',
+      backgroundmodal: '#FFFFFF',
     },
   };
 
@@ -138,6 +139,7 @@ function App() {
       ...PaperDarkTheme.colors,
       background: '#121212',
       text: '#FFFFFF',
+      backgroundmodal: '#2B2B2B',
     },
   };
 
