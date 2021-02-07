@@ -11,7 +11,8 @@ import {
   Card, 
   useTheme, 
   ActivityIndicator,
-  TouchableRipple
+  TouchableRipple,
+  TextInput,
 } from 'react-native-paper';
 import {
   widthPercentageToDP as wp,
@@ -19,6 +20,7 @@ import {
 } from 'react-native-responsive-screen';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Modal from 'react-native-modal';
+import DatePicker from 'react-native-datepicker'
 
 const StudentData = () => {
   const paperTheme = useTheme();
@@ -66,7 +68,7 @@ const StudentData = () => {
             />
             <Card
               style={{
-                marginLeft: 10,
+                marginLeft: wp('2%'),
                 width: wp('22%'),
                 shadowColor: '#FFFFFF',
                 borderRadius: 15,
@@ -77,10 +79,10 @@ const StudentData = () => {
               }}>
               <Text
                 style={{
-                  marginTop: wp('1%'),
-                  marginLeft: wp('2.5%'),
+                  marginTop: wp('1.5%'),
+                  marginLeft: wp('3%'),
                   fontWeight: 'bold',
-                  fontSize: wp('3.5%'),
+                  fontSize: wp('4%'),
                 }}>
                 XII RPL 1
               </Text>
@@ -112,7 +114,7 @@ const StudentData = () => {
                       <TouchableRipple 
                       onPress={showModal} 
                       style={{
-                        marginTop: hp('2.5%'), 
+                        marginTop: wp('5%'), 
                         position: 'absolute', 
                         right: wp('4%')
                       }}>
@@ -155,7 +157,30 @@ const StudentData = () => {
           animationInTiming={500}
           animationOutTiming={500}
           >
-            <Text style={{textAlign: 'center'}}>show modal</Text>
+            {/* Nisn */}
+            <TextInput
+              label="Nisn"
+              mode="outlined"
+              style={{
+                width: wp('80%'), 
+                height: hp('7%'),
+                marginLeft: wp('5%'),
+              }}
+            />
+
+            {/* Tanggal Lahir */}
+            <TextInput
+              label="Tanggal Lahir"
+              mode="outlined"
+              style={{
+                width: wp('80%'), 
+                height: hp('7%'),
+                marginLeft: wp('5%'),
+              }}
+            />
+
+            <DatePicker/>
+
           </Modal>
         </View>
       </>
@@ -211,7 +236,7 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-    marginTop: wp('1.5%'),
+    marginTop: wp('2%'),
     marginLeft: wp('2%'),
   },
   namasiswa: {
@@ -227,6 +252,7 @@ const styles = StyleSheet.create({
   },
   textcard: {
     flexDirection: 'column',
+    marginTop: wp('1%'),
   },
   loading: {
     flex: 1,
