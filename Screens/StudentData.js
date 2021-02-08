@@ -4,6 +4,7 @@ import {
   View, 
   StyleSheet, 
   ScrollView,
+  Image
 } from 'react-native';
 import {
   Text, 
@@ -12,7 +13,6 @@ import {
   useTheme, 
   ActivityIndicator,
   TouchableRipple,
-  TextInput,
 } from 'react-native-paper';
 import {
   widthPercentageToDP as wp,
@@ -20,7 +20,6 @@ import {
 } from 'react-native-responsive-screen';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Modal from 'react-native-modal';
-import DatePicker from 'react-native-datepicker'
 
 const StudentData = () => {
   const paperTheme = useTheme();
@@ -29,8 +28,8 @@ const StudentData = () => {
   const [visible, setVisible] = React.useState(false);
 
   // Const show & hide modal
-  const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
+  const handleOpen = () => setVisible(true);
+  const handleClose = () => setVisible(false);
   
   const API_URL = `http://localhost:8000`;
 
@@ -40,7 +39,6 @@ const StudentData = () => {
         method: 'GET',
       });
       const resp = await data.json();
-      console.log(resp.result);
       setDataSiswa(resp.result);
     } catch (error) {
       console.log(error);
@@ -97,33 +95,33 @@ const StudentData = () => {
                 <Card style={styles.colums} key={item.id}>
                     <View style={styles.row}>
                       <Card style={styles.images} />
-                      <View style={styles.textcard}>
-                        <Text style={styles.namasiswa}>{item.nama}</Text>
-                        {item.kelas.length > 0 ? 
-                          item.kelas.map((itemkelas) => {
-                            return(
-                              <View key={itemkelas.id}>
-                              <Text style={styles.kelassiswa}>{itemkelas.kelas}</Text>
-                              </View>
-                            )
-                          })
-                          :
-                          <Text>Null</Text>
-                        }
-                      </View>
-                      <TouchableRipple 
-                      onPress={showModal} 
-                      style={{
-                        marginTop: wp('5%'), 
-                        position: 'absolute', 
-                        right: wp('4%')
-                      }}>
-                        <MaterialCommunityIcons
-                          name="arrow-right-drop-circle"
-                          color={paperTheme.colors.text}
-                          size={30}
-                        />
-                      </TouchableRipple>
+                        <View style={styles.textcard}>
+                          <Text style={styles.namasiswa}>{item.nama}</Text>
+                          {item.kelas.length > 0 ? 
+                            item.kelas.map((itemkelas) => {
+                              return(
+                                <View key={itemkelas.id}>
+                                  <Text style={styles.kelassiswa}>{itemkelas.kelas}</Text>
+                                </View>
+                              )
+                            })
+                            :
+                            <Text>Null</Text>
+                          }
+                        </View>
+                        <TouchableRipple 
+                        onPress={handleOpen} 
+                        style={{
+                          marginTop: wp('5%'), 
+                          position: 'absolute', 
+                          right: wp('4%')
+                        }}>
+                          <MaterialCommunityIcons
+                            name="arrow-right-drop-circle"
+                            color={paperTheme.colors.text}
+                            size={30}
+                          />
+                        </TouchableRipple>
                     </View>
                 </Card>
               )
@@ -141,48 +139,39 @@ const StudentData = () => {
           onPress={() => console.log('Pressed')}
         />
 
-        {/* Modal Detail Siswa */}
-        <View>
+       {/* Modal Detail Siswa */}
           <Modal 
           isVisible={visible} 
-          onBackdropPress={hideModal} 
+          onSwipeComplete={handleClose}
+          swipeDirection='down'
           style={{
             backgroundColor: paperTheme.colors.backgroundmodal,
-            width: wp('90%'),
-            borderRadius: 20,
-            marginTop: wp('45%'),
-            marginBottom: wp('15%'),
-            marginLeft: wp('5%'),
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
+            width: wp('100%'),
+            marginLeft: 0,
+            marginTop: wp('10%'),
+            marginBottom: -10,
           }}
-          animationInTiming={500}
-          animationOutTiming={500}
           >
-            {/* Nisn */}
-            <TextInput
-              label="Nisn"
-              mode="outlined"
-              style={{
-                width: wp('80%'), 
-                height: hp('7%'),
-                marginLeft: wp('5%'),
-              }}
-            />
+            <View>
+              {/* Header */}
+              <View 
+                style={{
+                  alignItems: 'center',
+                  marginTop: hp('-42%'),
+                }}
+              >
+                <Image
+                source={require('../Asset/Image/headermodal.png')}
+                />
+              </View>
 
-            {/* Tanggal Lahir */}
-            <TextInput
-              label="Tanggal Lahir"
-              mode="outlined"
-              style={{
-                width: wp('80%'), 
-                height: hp('7%'),
-                marginLeft: wp('5%'),
-              }}
-            />
-
-            <DatePicker/>
-
+              <Text>
+                modal show
+              </Text>
+            </View>
           </Modal>
-        </View>
       </>
     );
   } else {
@@ -252,7 +241,6 @@ const styles = StyleSheet.create({
   },
   textcard: {
     flexDirection: 'column',
-    marginTop: wp('1%'),
   },
   loading: {
     flex: 1,

@@ -176,12 +176,12 @@ const styles = StyleSheet.create({
   viewmore: {
     flexDirection: 'row',
     padding: wp('4%'),
-    marginTop: hp('1.2%'),
+    marginTop: hp('0.2%'),
     marginLeft: wp('1%'),
   },
   image: {
-    width: wp('17'),
-    height: hp('9'),
+    width: wp('17.5'),
+    height: hp('10'),
     borderRadius: 20,
   },
   arrowlogout: {
