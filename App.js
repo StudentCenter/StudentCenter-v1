@@ -9,7 +9,7 @@
 
 import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   NavigationContainer,
@@ -20,6 +20,7 @@ import {
   Provider as PaperProvider,
   DefaultTheme as PaperDefaultTheme,
   DarkTheme as PaperDarkTheme,
+  useTheme
 } from 'react-native-paper';
 import HeaderApp from './Screens/HeaderApp';
 import HomeScreen from './Screens/HomeScreen';
@@ -31,24 +32,35 @@ import SettingScreen from './Screens/SettingScreen';
 import {AuthContext} from './components/context';
 
 function Home() {
-  const Tab = createBottomTabNavigator();
+  const paperTheme = useTheme();
+  const Tab = createMaterialBottomTabNavigator();
 
   return (
     <>
       <Tab.Navigator
         initialRouteName="Home"
-        tabBarOptions={{
-          activeTintColor: '#2F80ED',
-          inactiveTintColor: '#88A1C8',
-          showLabel: false,
-        }}>
+        labeled={false}
+        barStyle={{
+          backgroundColor: paperTheme.colors.backgroundmodal,
+          overflow: 'hidden',
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
+          shadowColor: '#FFFFFF',
+          shadowOffset: {width: 0, height: 2},
+          shadowOpacity: 30,
+          shadowRadius: 30,
+          elevation: 20,
+        }}
+        activeColor="#2F80ED"
+        inactiveColor="#88A1C8"
+        >
         <Tab.Screen
           name="Home"
           component={HomeScreen}
           options={{
             tabBarLabel: 'Home',
-            tabBarIcon: ({color, size}) => (
-              <MaterialCommunityIcons name="home" color={color} size={size} />
+            tabBarIcon: ({color}) => (
+              <MaterialCommunityIcons name="home" color={color} size={20} />
             ),
           }}
         />
@@ -57,11 +69,11 @@ function Home() {
           component={StudentAttandance}
           options={{
             tabBarLabel: 'Student Attandance',
-            tabBarIcon: ({color, size}) => (
+            tabBarIcon: ({color}) => (
               <MaterialCommunityIcons
                 name="calendar-blank"
                 color={color}
-                size={size}
+                size={20}
               />
             ),
           }}
@@ -71,11 +83,11 @@ function Home() {
           component={StudentData}
           options={{
             tabBarLabel: 'Student Data',
-            tabBarIcon: ({color, size}) => (
+            tabBarIcon: ({color}) => (
               <MaterialCommunityIcons
                 name="account"
                 color={color}
-                size={size}
+                size={20}
               />
             ),
           }}
@@ -85,11 +97,11 @@ function Home() {
           component={PPDBData}
           options={{
             tabBarLabel: 'PPDB',
-            tabBarIcon: ({color, size}) => (
+            tabBarIcon: ({color}) => (
               <MaterialCommunityIcons
                 name="file-plus"
                 color={color}
-                size={size}
+                size={20}
               />
             ),
           }}
@@ -99,11 +111,11 @@ function Home() {
           component={EkskulData}
           options={{
             tabBarLabel: 'Ekskul',
-            tabBarIcon: ({color, size}) => (
+            tabBarIcon: ({color}) => (
               <MaterialCommunityIcons
                 name="basketball"
                 color={color}
-                size={size}
+                size={20}
               />
             ),
           }}
