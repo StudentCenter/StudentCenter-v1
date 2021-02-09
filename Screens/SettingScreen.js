@@ -70,6 +70,7 @@ const SettingScreen = () => {
               }}
               thumbColor={paperTheme.dark ? '#ffffff' : '#000000'}
               trackColor={{false: '#B2B2B2', true: '#000000'}}
+              useNativeDriver={true}
             />
           </View>
 

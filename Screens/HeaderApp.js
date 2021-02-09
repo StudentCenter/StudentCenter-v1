@@ -14,6 +14,7 @@ function HeaderApp({navigation, previous}) {
               <Appbar.BackAction
                 onPress={navigation.goBack}
                 color={paperTheme.colors.text}
+                useNativeDriver={true}
               />
               <Text
                 style={{
@@ -43,6 +44,7 @@ function HeaderApp({navigation, previous}) {
                 icon="dots-vertical"
                 onPress={() => navigation.navigate('Setting')}
                 color={paperTheme.colors.text}
+                useNativeDriver={true}
               />
             </>
           ) : null}

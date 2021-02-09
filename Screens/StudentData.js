@@ -4,7 +4,6 @@ import {
   View, 
   StyleSheet, 
   ScrollView,
-  Image
 } from 'react-native';
 import {
   Text, 
@@ -12,27 +11,39 @@ import {
   Card, 
   useTheme, 
   ActivityIndicator,
-  TouchableRipple,
+  Button,
 } from 'react-native-paper';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Modal from 'react-native-modal';
+import ModalDetailSiswa from '../components/ModalDetailSiswa';
 
 const StudentData = () => {
   const paperTheme = useTheme();
   const [datasiswa, setDataSiswa] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const [visible, setVisible] = React.useState(false);
+  const [idSiswa, setIdSiswa] = React.useState(0);
 
   // Const show & hide modal
-  const handleOpen = () => setVisible(true);
+  const handleOpen = (id) => {
+    setIdSiswa(id)
+    setVisible(true);
+  }
   const handleClose = () => setVisible(false);
   
   const API_URL = `http://localhost:8000`;
 
+  React.useEffect(() => {
+    if (idSiswa) {
+      handleOpen()
+    }
+  }, [])
+  
+
+  // Fetch data siswa
   const fetchSiswa = async () => {
     try {
       const data = await fetch(`${API_URL}/student`, {
@@ -45,7 +56,7 @@ const StudentData = () => {
       alert(error);
     }
   }
-
+  
   React.useEffect(() => {
     fetchSiswa().
       then(() => {
@@ -109,19 +120,20 @@ const StudentData = () => {
                             <Text>Null</Text>
                           }
                         </View>
-                        <TouchableRipple 
-                        onPress={handleOpen} 
-                        style={{
-                          marginTop: wp('5%'), 
-                          position: 'absolute', 
-                          right: wp('4%')
-                        }}>
-                          <MaterialCommunityIcons
-                            name="arrow-right-drop-circle"
-                            color={paperTheme.colors.text}
-                            size={30}
-                          />
-                        </TouchableRipple>
+                        <Button
+                          onPress={() => handleOpen(item.id)} 
+                          color='#fff'
+                          style={{
+                            marginTop: wp('3%'), 
+                            position: 'absolute', 
+                            right: 0
+                          }}>
+                            <MaterialCommunityIcons
+                              name="arrow-right-drop-circle"
+                              color={paperTheme.colors.text}
+                              size={20}
+                        />
+                        </Button>
                     </View>
                 </Card>
               )
@@ -132,46 +144,19 @@ const StudentData = () => {
           </View>
         </ScrollView>
 
+        {/* Modal Detail Siswa */}
+        <ModalDetailSiswa
+          visible={visible}
+          handleClose={handleClose}
+          idSiswa={idSiswa}
+        />
+
         {/* Float button */}
         <FAB
           style={styles.fab}
           icon="plus"
           onPress={() => console.log('Pressed')}
         />
-
-       {/* Modal Detail Siswa */}
-          <Modal 
-          isVisible={visible} 
-          onSwipeComplete={handleClose}
-          swipeDirection='down'
-          style={{
-            backgroundColor: paperTheme.colors.backgroundmodal,
-            borderTopLeftRadius: 20,
-            borderTopRightRadius: 20,
-            width: wp('100%'),
-            marginLeft: 0,
-            marginTop: wp('10%'),
-            marginBottom: -10,
-          }}
-          >
-            <View>
-              {/* Header */}
-              <View 
-                style={{
-                  alignItems: 'center',
-                  marginTop: hp('-42%'),
-                }}
-              >
-                <Image
-                source={require('../Asset/Image/headermodal.png')}
-                />
-              </View>
-
-              <Text>
-                modal show
-              </Text>
-            </View>
-          </Modal>
       </>
     );
   } else {
