@@ -164,10 +164,10 @@ const StudentData = () => {
   } else {
     return(
       <ActivityIndicator 
-      animating={true} 
-      color="#345EF0" 
-      size={40}
-      style={styles.loading} 
+        animating={true} 
+        color="#345EF0" 
+        size={40}
+        style={styles.loading} 
       />
     )
   }

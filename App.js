@@ -42,9 +42,6 @@ function Home() {
         labeled={false}
         barStyle={{
           backgroundColor: paperTheme.colors.backgroundmodal,
-          overflow: 'hidden',
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
           shadowColor: '#FFFFFF',
           shadowOffset: {width: 0, height: 2},
           shadowOpacity: 30,

@@ -40,9 +40,7 @@ const PPDBData = () => {
       </View>
       <Backdrop
         visible={visible}
-        handleOpen={handleOpen}
         handleClose={handleClose}
-        onClose={() => {}}
         swipeConfig={{
           velocityThreshold: 0.3,
           directionalOffsetThreshold: 80,
@@ -53,10 +51,15 @@ const PPDBData = () => {
         }}
         overlayColor="rgba(0,0,0,0.32)"
         backdropStyle={{
-          backgroundColor: 'blue',
+          backgroundColor: '#fff',
         }}
         containerStyle={{
-          
+          backgroundColor: 'white',
+          height: hp('70%'),
+          width: wp('100%'),
+          position: 'absolute',
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
         }}
         >
         <View>
