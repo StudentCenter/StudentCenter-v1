@@ -80,7 +80,7 @@ const StudentData = () => {
                 marginLeft: wp('2%'),
                 width: wp('22%'),
                 shadowColor: '#FFFFFF',
-                borderRadius: 15,
+                borderRadius: wp('10%'),
                 shadowOffset: {width: 0, height: 2},
                 shadowOpacity: 25,
                 shadowRadius: 15,
@@ -126,7 +126,9 @@ const StudentData = () => {
                           style={{
                             marginTop: wp('3%'), 
                             position: 'absolute', 
-                            right: 0
+                            right: 0,
+                            borderRadius: 20,
+                            width: 1,
                           }}>
                             <MaterialCommunityIcons
                               name="arrow-right-drop-circle"
@@ -164,6 +166,7 @@ const StudentData = () => {
       <ActivityIndicator 
       animating={true} 
       color="#345EF0" 
+      size={40}
       style={styles.loading} 
       />
     )
@@ -180,9 +183,9 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    marginTop: wp('2'),
-    marginLeft: wp('5'),
-    marginBottom: wp('5'),
+    marginTop: wp('2%'),
+    marginLeft: wp('5%'),
+    marginBottom: wp('25%'),
   },
   colums: {
     marginTop: hp('2%'),

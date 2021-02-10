@@ -53,6 +53,7 @@ function Home() {
         }}
         activeColor="#2F80ED"
         inactiveColor="#88A1C8"
+        sceneAnimationEnabled={true}
         useNativeDriver={true}
         >
         <Tab.Screen

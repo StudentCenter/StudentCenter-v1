@@ -3,13 +3,14 @@ import {
     Image,
     View,
     Text,
-    StyleSheet
+    StyleSheet,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { 
     useTheme,
     Button,
     TextInput,
+    ActivityIndicator,
 } from 'react-native-paper';
 import {
     widthPercentageToDP as wp,
@@ -25,6 +26,7 @@ function ModalDetailSiswa({visible, handleClose, idSiswa}) {
     const [namaIbu, setNamaIbu] = React.useState('')
     const [agamaSiswa, setAgamaSiswa] = React.useState('')
     const [kelasSiswa, setKelasSiswa] = React.useState('')
+    const [loading, setLoading] = React.useState(false)
 
     const fetchSiswaDetail = async () => {
         try {
@@ -48,11 +50,19 @@ function ModalDetailSiswa({visible, handleClose, idSiswa}) {
     }
     
     React.useEffect(() => {
-        if (idSiswa) {   
-            fetchSiswaDetail()
-        }
+       if (visible === true) {
+           fetchSiswaDetail().then(() => {
+               setLoading(true)
+           })
+       }
     }, [idSiswa])
-    
+
+    React.useEffect(() => {
+        if (visible === false) {
+            setLoading(false)
+        }
+    })
+
     const styles = StyleSheet.create({
         buttonMore: {
             bottom: wp('-17%'),
@@ -81,96 +91,103 @@ function ModalDetailSiswa({visible, handleClose, idSiswa}) {
         }
     })
 
-    return(
-         <>
-         <Modal 
-            isVisible={visible} 
-            onBackdropPress={handleClose}
-            style={styles.modalContainer}
-            animationIn='slideInUp'
-            animationInTiming={700}
-            animationOut='slideOutDown'
-            animationOutTiming={700}
-            useNativeDriver={true}
-        >
-            <View 
-                style={{
-                    alignItems: 'center',            
-                }}
-            >
-                {/* Header */}
-                <View>
-                    <Image
-                        source={require('../Asset/Image/headermodal.png')}
-                        style={{
-                            marginTop: hp('-10%'),
-                        }}
-                    /> 
-                </View>
-                <View 
-                    style={{
-                        marginTop: wp('10%')
-                    }}
+        return(
+             <>
+             <Modal 
+                isVisible={visible} 
+                onSwipeComplete={handleClose}
+                swipeDirection='down'
+                style={styles.modalContainer}
+                animationIn='slideInUp'
+                animationInTiming={700}
                 >
-                    {/* Nama Siswa */}
-                    <TextInput
-                        mode="flat"
-                        disabled="true"
-                        label="Nama Siswa"
-                        value={namaSiswa}
-                        style={styles.textInput}
-                    />
-                    {/* Kelas Siswa */}
-                    <TextInput
-                        mode="flat"
-                        disabled="true"
-                        label="Kelas Siswa"
-                        value={kelasSiswa}
-                        style={styles.textInput}
-                    />
-                    {/* Nama Ayah */}
-                    <TextInput
-                        mode="flat"
-                        disabled="true"
-                        label="Nama Ayah"
-                        value={namaAyah}
-                        style={styles.textInput}
-                    />
-                    {/* Nama Ibu */}
-                    <TextInput
-                        mode="flat"
-                        disabled="true"
-                        label="Nama Ibu"
-                        value={namaIbu}
-                        style={styles.textInput}
-                    />
-                    {/* Agama */}
-                    <TextInput
-                        mode="flat"
-                        disabled="true"
-                        label="Agama"
-                        value={agamaSiswa}
-                        style={styles.textInput}
-                    />
-    
-                    <Button 
-                        mode='contained'
-                        style={styles.buttonMore}
+                {loading === true ? 
+                    <View 
+                        style={{
+                            alignItems: 'center',            
+                        }}
                     >
-                        <Text 
+                        {/* Header */}
+                        <View>
+                            <Image
+                                source={require('../Asset/Image/headermodal.png')}
+                                style={{
+                                    marginTop: hp('-10%'),
+                                }}
+                            /> 
+                        </View>
+                        <View 
                             style={{
-                                fontSize: wp('5%'),
-                                color: 'white'
+                                marginTop: wp('10%')
                             }}
                         >
-                            More Detail
-                        </Text>
-                    </Button>
-                </View>
-            </View>
-          </Modal>
-         </>   
-    )
+                            {/* Nama Siswa */}
+                            <TextInput
+                                mode="flat"
+                                disabled="true"
+                                label="Nama Siswa"
+                                value={namaSiswa}
+                                style={styles.textInput}
+                            />
+                            {/* Kelas Siswa */}
+                            <TextInput
+                                mode="flat"
+                                disabled="true"
+                                label="Kelas Siswa"
+                                value={kelasSiswa}
+                                style={styles.textInput}
+                            />
+                            {/* Nama Ayah */}
+                            <TextInput
+                                mode="flat"
+                                disabled="true"
+                                label="Nama Ayah"
+                                value={namaAyah}
+                                style={styles.textInput}
+                            />
+                            {/* Nama Ibu */}
+                            <TextInput
+                                mode="flat"
+                                disabled="true"
+                                label="Nama Ibu"
+                                value={namaIbu}
+                                style={styles.textInput}
+                            />
+                            {/* Agama */}
+                            <TextInput
+                                mode="flat"
+                                disabled="true"
+                                label="Agama"
+                                value={agamaSiswa}
+                                style={styles.textInput}
+                            />
+            
+                            <Button 
+                                mode='contained'
+                                style={styles.buttonMore}
+                            >
+                                <Text 
+                                    style={{
+                                        fontSize: wp('5%'),
+                                        color: 'white'
+                                    }}
+                                >
+                                    More Detail
+                                </Text>
+                            </Button>
+                        </View>
+                    </View>
+                :
+                    <ActivityIndicator 
+                    animating={true} 
+                    size={40}
+                    color="#345EF0" 
+                    style={styles.loading} 
+                    />
+                }
+            </Modal>
+             </>   
+        )
 }
 
 export default ModalDetailSiswa
