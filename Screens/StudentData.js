@@ -4,6 +4,7 @@ import {
   View, 
   StyleSheet, 
   ScrollView,
+  Image
 } from 'react-native';
 import {
   Text, 
@@ -105,7 +106,10 @@ const StudentData = () => {
               return (
                 <Card style={styles.colums} key={item.id}>
                     <View style={styles.row}>
-                      <Card style={styles.images} />
+                      <Image 
+                        source={{uri: item.foto_siswa}} 
+                        style={styles.images} 
+                      />
                         <View style={styles.textcard}>
                           <Text style={styles.namasiswa}>{item.nama}</Text>
                           {item.kelas.length > 0 ? 
