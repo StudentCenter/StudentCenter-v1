@@ -26,6 +26,7 @@ import HeaderApp from './Screens/HeaderApp';
 import HomeScreen from './Screens/HomeScreen';
 import StudentAttandance from './Screens/StudentAttandance';
 import StudentData from './Screens/StudentData';
+import DetailSiswa from './Screens/DetailSiswa';
 import EkskulData from './Screens/EkskulData';
 import PPDBData from './Screens/PPDBData';
 import SettingScreen from './Screens/SettingScreen';
@@ -173,9 +174,11 @@ function App() {
               initialRouteName="Home"
               screenOptions={{
                 header: (props) => <HeaderApp {...props} />,
+                studentdata: (props) => <StudentData {...props}/>,
               }}>
               <Stack.Screen name="Home" component={Home} />
-              <Stack.Screen name="Setting" component={SettingScreen} />
+              <Stack.Screen name="Setting Profile" component={SettingScreen} />
+              <Stack.Screen name="Detail Siswa" component={DetailSiswa} />
             </Stack.Navigator>
           </NavigationContainer>
         </AuthContext.Provider>

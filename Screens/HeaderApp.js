@@ -2,9 +2,12 @@
 import * as React from 'react';
 import {Appbar, useTheme} from 'react-native-paper';
 import {StyleSheet, Text, View} from 'react-native';
+import {useRoute} from '@react-navigation/native';
 
 function HeaderApp({navigation, previous}) {
   const paperTheme = useTheme();
+  const route = useRoute();
+  
   return (
     <>
       <View>
@@ -22,7 +25,7 @@ function HeaderApp({navigation, previous}) {
                   fontWeight: 'bold',
                   color: paperTheme.colors.text,
                 }}>
-                Setting Profile
+                {route.name}
               </Text>
             </>
           ) : (
@@ -42,7 +45,7 @@ function HeaderApp({navigation, previous}) {
               />
               <Appbar.Action
                 icon="dots-vertical"
-                onPress={() => navigation.navigate('Setting')}
+                onPress={() => navigation.navigate('Setting Profile')}
                 color={paperTheme.colors.text}
                 useNativeDriver={true}
               />

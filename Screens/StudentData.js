@@ -21,7 +21,7 @@ import {
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import ModalDetailSiswa from '../components/ModalDetailSiswa';
 
-const StudentData = () => {
+const StudentData = ({navigation}) => {
   const paperTheme = useTheme();
   const [datasiswa, setDataSiswa] = React.useState('');
   const [loading, setLoading] = React.useState(false);
@@ -155,6 +155,7 @@ const StudentData = () => {
           visible={visible}
           handleClose={handleClose}
           idSiswa={idSiswa}
+          navigation={navigation}
         />
 
         {/* Float button */}

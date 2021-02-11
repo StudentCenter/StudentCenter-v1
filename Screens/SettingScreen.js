@@ -20,7 +20,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 const SettingScreen = () => {
   const paperTheme = useTheme();
   const {toggleTheme} = React.useContext(AuthContext);
-  console.log(paperTheme.dark);
+  
   return (
     <ScrollView>
       <View style={styles.container}>

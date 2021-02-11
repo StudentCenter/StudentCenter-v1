@@ -17,8 +17,7 @@ import {
 } from 'react-native-responsive-screen';
 import { Backdrop } from "react-native-backdrop";
 
-  
-function ModalDetailSiswa({visible, handleClose, idSiswa}) {
+function ModalDetailSiswa({visible, handleClose, idSiswa, navigation}) {
     const paperTheme = useTheme();
     const API_URL = `http://localhost:8000`;
     const [namaSiswa, setNamaSiswa] = React.useState('')
@@ -55,7 +54,7 @@ function ModalDetailSiswa({visible, handleClose, idSiswa}) {
                setLoading(true)
            })
        }
-    }, [idSiswa])
+    }, [visible])
 
     React.useEffect(() => {
         if (visible === false) {
@@ -180,6 +179,7 @@ function ModalDetailSiswa({visible, handleClose, idSiswa}) {
                                 <Button 
                                     mode='contained'
                                     style={styles.buttonMore}
+                                    onPress={() => navigation.navigate('Detail Siswa')}
                                 >
                                     <Text 
                                         style={{
