@@ -179,7 +179,11 @@ function ModalDetailSiswa({visible, handleClose, idSiswa, navigation}) {
                                 <Button 
                                     mode='contained'
                                     style={styles.buttonMore}
-                                    onPress={() => navigation.navigate('Detail Siswa')}
+                                    onPress={() => {
+                                        navigation.navigate('Detail Siswa', {
+                                            idSiswa: idSiswa
+                                        })
+                                    }}
                                 >
                                     <Text 
                                         style={{

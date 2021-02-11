@@ -128,11 +128,10 @@ const StudentData = ({navigation}) => {
                           onPress={() => handleOpen(item.id)} 
                           color='#fff'
                           style={{
-                            marginTop: wp('3%'), 
+                            marginTop: wp('3.5%'), 
                             position: 'absolute', 
-                            right: 0,
+                            right: wp('-2%'),
                             borderRadius: 20,
-                            width: 1,
                           }}>
                             <MaterialCommunityIcons
                               name="arrow-right-drop-circle"
@@ -234,6 +233,7 @@ const styles = StyleSheet.create({
   },
   textcard: {
     flexDirection: 'column',
+    marginTop: wp('1%'),
   },
   loading: {
     flex: 1,
