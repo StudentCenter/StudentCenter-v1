@@ -6,7 +6,8 @@ import {
     StyleSheet
  } from 'react-native';
 import { 
-    TextInput
+    TextInput,
+    ActivityIndicator,
  } from 'react-native-paper';
 import {
     widthPercentageToDP as wp,
@@ -16,7 +17,7 @@ import {
 const DetailSiswa = ({route}) => {
     const {idSiswa} = route.params;
     const idSiswaFix = JSON.stringify(idSiswa)
-    console.log(idSiswaFix)
+    const [loading, setLoading] = React.useState(false)
     const API_URL = `http://localhost:8000`;
 
     const [fotoSiswa, setFotoSiswa] = React.useState('')
@@ -36,7 +37,6 @@ const DetailSiswa = ({route}) => {
             })
             const resp = await data.json()
             const kelas = resp.data.kelas
-            console.log(resp.data)
             kelas.map((item) => {
                 const kelasfix = item.kelas
                 setKelasSiswa(kelasfix)
@@ -56,54 +56,139 @@ const DetailSiswa = ({route}) => {
     }
 
     React.useEffect(() => {
-        fetchDetail()
+        fetchDetail().then(() => {
+            setLoading(true)
+        })
     })
 
+    // Styles
     const styles = StyleSheet.create({
         textInput: {
             width: wp('90%'),
             height: hp('9%'),
             marginBottom: wp('4%'),
-            marginTop: wp('4%'),
             borderRadius: 10,
             borderTopLeftRadius: 10,
             borderTopRightRadius: 10
         },
+        loading: {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        image: {
+            width: wp('40%'),
+            backgroundColor: '#C4C4C4',
+            height: hp('22%'),
+            marginTop: wp('5%'),
+            borderRadius: 20,
+            marginBottom: wp('4%')
+        }
     })
 
-    return(
-        <>
-            <ScrollView>
-                <View
-                    style={{
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }}
-                >
-                    {/* foto siswa */}
-                    <Image
-                        source={{uri: fotoSiswa}}
+    if (loading) {
+        return(
+            <>
+                <ScrollView>
+                    <View
                         style={{
-                            width: wp('40%'),
-                            backgroundColor: '#C4C4C4',
-                            height: hp('22%'),
-                            marginTop: wp('5%'),
-                            borderRadius: 20
+                            justifyContent: 'center',
+                            alignItems: 'center'
                         }}
-                    />
-                   
-                     {/* Nama Siswa */}
-                     <TextInput
-                        mode="flat"
-                        disabled="true"
-                        label="Nama Siswa"
-                        value={namaSiswa}
-                        style={styles.textInput}
-                    />
-                </View>
-            </ScrollView>
-        </>
-    )
+                    >
+                        {/* foto siswa */}
+                        <Image
+                            source={{uri: fotoSiswa}}
+                            style={styles.image}
+                        />
+                       
+                        {/* Nama Siswa */}
+                        <TextInput
+                            mode="flat"
+                            disabled="true"
+                            label="Nama Siswa"
+                            value={namaSiswa}
+                            style={styles.textInput}
+                        />
+
+                        {/* Kelas Siswa */}
+                        <TextInput
+                            mode="flat"
+                            disabled="true"
+                            label="Kelas Siswa"
+                            value={kelasSiswa}
+                            style={styles.textInput}
+                        />
+
+
+                        {/* Agama Siswa */}
+                        <TextInput
+                            mode="flat"
+                            disabled="true"
+                            label="Agama Siswa"
+                            value={agamaSiswa}
+                            style={styles.textInput}
+                        />
+
+                        {/* No Hp Siswa */}
+                        <TextInput
+                            mode="flat"
+                            disabled="true"
+                            label="No Hp Siswa"
+                            value={noHpSiswa}
+                            style={styles.textInput}
+                        />
+
+                        {/* Nama Ayah Siswa */}
+                        <TextInput
+                            mode="flat"
+                            disabled="true"
+                            label="Nama Ayah"
+                            value={namaAyah}
+                            style={styles.textInput}
+                        />
+
+                        {/* No Hp Ayah */}
+                        <TextInput
+                            mode="flat"
+                            disabled="true"
+                            label="No Hp Ayah"
+                            value={noHpAyah}
+                            style={styles.textInput}
+                        />
+
+                        {/* Nama Ibu */}
+                        <TextInput
+                            mode="flat"
+                            disabled="true"
+                            label="Nama Ibu"
+                            value={namaIbu}
+                            style={styles.textInput}
+                        />
+
+                        {/* No Hp Ibu */}
+                        <TextInput
+                            mode="flat"
+                            disabled="true"
+                            label="No Hp Ibu"
+                            value={noHpIbu}
+                            style={styles.textInput}
+                        />
+    
+                    </View>
+                </ScrollView>
+            </>
+        )
+    } else {
+        return(
+            <ActivityIndicator 
+            animating={true} 
+            size={40}
+            color="#345EF0" 
+            style={styles.loading} 
+            />
+        )
+    }
 }
 
 export default DetailSiswa

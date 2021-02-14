@@ -4,7 +4,8 @@ import {
   View, 
   StyleSheet, 
   ScrollView,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native';
 import {
   Text, 
@@ -19,30 +20,12 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import ModalDetailSiswa from '../components/ModalDetailSiswa';
 
 const StudentData = ({navigation}) => {
   const paperTheme = useTheme();
   const [datasiswa, setDataSiswa] = React.useState('');
   const [loading, setLoading] = React.useState(false);
-  const [visible, setVisible] = React.useState(false);
-  const [idSiswa, setIdSiswa] = React.useState(0);
-
-  // Const show & hide modal
-  const handleOpen = (id) => {
-    setIdSiswa(id)
-    setVisible(true);
-  }
-  const handleClose = () => setVisible(false);
-  
   const API_URL = `http://localhost:8000`;
-
-  React.useEffect(() => {
-    if (idSiswa) {
-      handleOpen()
-    }
-  }, [])
-  
 
   // Fetch data siswa
   const fetchSiswa = async () => {
@@ -124,13 +107,17 @@ const StudentData = ({navigation}) => {
                             <Text>Null</Text>
                           }
                         </View>
-                        <Button
-                          onPress={() => handleOpen(item.id)} 
+                        <TouchableOpacity
+                          onPress={() => {
+                              navigation.navigate('Detail Siswa', {
+                                  idSiswa: item.id
+                              })
+                          }}
                           color='#fff'
                           style={{
-                            marginTop: wp('3.5%'), 
+                            marginTop: wp('6%'), 
                             position: 'absolute', 
-                            right: wp('-2%'),
+                            right: wp('5%'),
                             borderRadius: 20,
                           }}>
                             <MaterialCommunityIcons
@@ -138,7 +125,7 @@ const StudentData = ({navigation}) => {
                               color={paperTheme.colors.text}
                               size={20}
                         />
-                        </Button>
+                        </TouchableOpacity>
                     </View>
                 </Card>
               )
@@ -148,14 +135,6 @@ const StudentData = ({navigation}) => {
           }
           </View>
         </ScrollView>
-
-        {/* Modal Detail Siswa */}
-        <ModalDetailSiswa
-          visible={visible}
-          handleClose={handleClose}
-          idSiswa={idSiswa}
-          navigation={navigation}
-        />
 
         {/* Float button */}
         <FAB
