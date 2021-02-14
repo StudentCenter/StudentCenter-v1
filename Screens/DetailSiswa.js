@@ -180,14 +180,7 @@ const DetailSiswa = ({route}) => {
             </>
         )
     } else {
-        return(
-            <ActivityIndicator 
-            animating={true} 
-            size={40}
-            color="#345EF0" 
-            style={styles.loading} 
-            />
-        )
+      
     }
 }
 
