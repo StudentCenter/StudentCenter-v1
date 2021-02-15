@@ -139,6 +139,7 @@ function App() {
       background: '#FFFFFF',
       text: '#000000',
       backgroundmodal: '#FFFFFF',
+      textinput: '#EEEEEE'
     },
   };
 
@@ -152,6 +153,7 @@ function App() {
       background: '#121212',
       text: '#FFFFFF',
       backgroundmodal: '#2B2B2B',
+      textinput: '#2B2B2B'
     },
   };
 
