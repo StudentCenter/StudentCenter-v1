@@ -3,8 +3,7 @@ import {
     Text,
     View,
     StyleSheet,
-    TouchableOpacity,
-  
+    TouchableOpacity
  } from 'react-native';
 import { 
     TextInput,
@@ -21,7 +20,6 @@ function LoginScreen({navigation}) {
     const [showpassword, setShowPassword] = React.useState(true)
     const [username, setUsername] = React.useState('')
     const [password, setPassword] = React.useState('')
-    const [loading, setLoading] = React.useState(false)
     const API_URL = `http://localhost:8000`;
 
     const handleShow = () => {
@@ -55,12 +53,15 @@ function LoginScreen({navigation}) {
                   },
             })
             const resp = await data.json()
-            if (resp.success) {
-                AsyncStorage.setItem('username', resp.result.username)
+            console.log(resp)
+            const setItemUser = await AsyncStorage.setItem('user_name', resp.result.username)
+            console.log(setItemUser)
+            if (resp.message === 'login_success') {
                 console.log(resp.result.username)
                 navigation.replace('Landing')
             } else {
                 console.log('Please check your username or password')
+                alert('Your username or password is not correct!')
             }
         } catch (error) {
             alert(error)
@@ -99,7 +100,6 @@ function LoginScreen({navigation}) {
                 placeholder='johndoe'
                 onChangeText={(username) => setUsername(username)}
             />
-
             <View style={styles.passwordcontainer}>
                 <TextInput
                     label='password'
@@ -127,7 +127,6 @@ function LoginScreen({navigation}) {
             >
                 Login
             </Button>
-
         </>
     )
 }

@@ -16,10 +16,22 @@ import {
 } from 'react-native-responsive-screen';
 import {AuthContext} from '../components/context';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import AsyncStorage from '@react-native-community/async-storage';
 
-const SettingScreen = () => {
+const SettingScreen = ({navigation}) => {
   const paperTheme = useTheme();
   const {toggleTheme} = React.useContext(AuthContext);
+  console.log(navigation)
+
+  const fetchLogout = async () => {
+    try {
+      const data = await AsyncStorage.clear().then(() => {
+        navigation.replace('Auth')
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
   
   return (
     <ScrollView>
@@ -100,13 +112,12 @@ const SettingScreen = () => {
             />
           </View>
 
-          <TouchableOpacity>
             <View style={styles.viewmore}>
               {/* Logout menu */}
               <Image
                 source={require('../Asset/Image/logout.png')}
                 style={styles.image}
-              />
+                />
               <Text
                 style={{
                   marginTop: '6%',
@@ -119,14 +130,17 @@ const SettingScreen = () => {
                 Logout
               </Text>
 
-              <MaterialCommunityIcons
-                name="arrow-right-drop-circle"
-                color={paperTheme.colors.text}
-                size={30}
-                style={{marginTop: hp('2%'), marginLeft: wp('26%')}}
-              />
+              <TouchableOpacity
+                onPress={fetchLogout}
+              >
+                <MaterialCommunityIcons
+                  name="arrow-right-drop-circle"
+                  color={paperTheme.colors.text}
+                  size={30}
+                  style={{marginTop: hp('2%'), marginLeft: wp('26%')}}
+                />
+              </TouchableOpacity>
             </View>
-          </TouchableOpacity>
         </Card>
 
         {/* Text Version */}
