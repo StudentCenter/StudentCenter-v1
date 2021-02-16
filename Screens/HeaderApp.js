@@ -12,13 +12,13 @@ function HeaderApp({navigation, previous}) {
     <>
       <View>
         <Appbar.Header style={{backgroundColor: 'transparent'}}>
-          {previous ? (
+          {previous ? 
             <>
               <Appbar.BackAction
-                onPress={navigation.goBack}
-                color={paperTheme.colors.text}
-                useNativeDriver={true}
-              />
+              onPress={navigation.goBack}
+              color={paperTheme.colors.text}
+              useNativeDriver={true}
+             />
               <Text
                 style={{
                   fontSize: 17,
@@ -28,12 +28,10 @@ function HeaderApp({navigation, previous}) {
                 {route.name}
               </Text>
             </>
-          ) : (
-            <Appbar.Content title="Title" color={paperTheme.colors.text} />
-          )}
-          {!previous ? (
+            : 
             <>
-              <Appbar.Action
+              <Appbar.Content title="Title" color={paperTheme.colors.text} />
+             <Appbar.Action
                 icon="bell"
                 style={styles.bellIcon}
                 color={paperTheme.colors.text}
@@ -49,8 +47,8 @@ function HeaderApp({navigation, previous}) {
                 color={paperTheme.colors.text}
                 useNativeDriver={true}
               />
-            </>
-          ) : null}
+          </>
+          }
         </Appbar.Header>
       </View>
     </>
