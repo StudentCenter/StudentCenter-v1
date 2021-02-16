@@ -8,6 +8,8 @@ import {
 import { 
     TextInput,
     ActivityIndicator,
+    useTheme,
+    Banner
  } from 'react-native-paper';
 import {
     widthPercentageToDP as wp,
@@ -15,9 +17,11 @@ import {
 } from 'react-native-responsive-screen';
 
 const DetailSiswa = ({route}) => {
+    const paperTheme = useTheme();
     const {idSiswa} = route.params;
-    const idSiswaFix = JSON.stringify(idSiswa)
-    const [loading, setLoading] = React.useState(false)
+    const idSiswaFix = JSON.stringify(idSiswa);
+    const [loading, setLoading] = React.useState(false);
+    const [visible, setVisible] = React.useState(true);
     const API_URL = `http://localhost:8000`;
 
     const [fotoSiswa, setFotoSiswa] = React.useState('')
@@ -69,7 +73,8 @@ const DetailSiswa = ({route}) => {
             marginBottom: wp('4%'),
             borderRadius: 10,
             borderTopLeftRadius: 10,
-            borderTopRightRadius: 10
+            borderTopRightRadius: 10,
+            backgroundColor: paperTheme.colors.textinput
         },
         loading: {
             flex: 1,
@@ -89,6 +94,28 @@ const DetailSiswa = ({route}) => {
     if (loading) {
         return(
             <>
+                 <Banner
+                    visible={visible}
+                    actions={[
+                        {
+                        label: 'Hide',
+                        onPress: () => setVisible(false),
+                        },
+                    ]}
+                    icon={({size}) => (
+                        <Image
+                        source={{
+                            uri: 'https://img.icons8.com/ios-filled/48/000000/break--v1.png',
+                        }}
+                        style={{
+                            width: size,
+                            height: size,
+                            tintColor: 'red'
+                        }}
+                        />
+                    )}>
+                   If you want to edit this data, please report it to admin.
+                </Banner>
                 <ScrollView>
                     <View
                         style={{

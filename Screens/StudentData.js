@@ -13,7 +13,6 @@ import {
   Card, 
   useTheme, 
   ActivityIndicator,
-  Button,
 } from 'react-native-paper';
 import {
   widthPercentageToDP as wp,
