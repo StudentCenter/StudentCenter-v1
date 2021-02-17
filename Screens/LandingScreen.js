@@ -8,7 +8,6 @@ import {
     useTheme,
     Button
  } from 'react-native-paper';
-import { color } from 'react-native-reanimated';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
@@ -16,6 +15,20 @@ import {
 
 function LandingScreen({navigation}) {
     const paperTheme = useTheme()
+    const fetchLoginData = async () => {
+        try {
+            const data = await AsyncStorage.getItem('user_name').then((value) => navigation.replace(
+                value === null ? 'Auth' : 'Landing'
+            ))
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    React.useEffect(() => {
+        fetchLoginData()
+    })
 
     return(
         <>
@@ -76,7 +89,7 @@ function LandingScreen({navigation}) {
                             color: '#2F80ED',
                             marginTop: wp('5%')
                         }}
-                        onPress={() => navigation.navigate('Auth')}
+                        onPress={() => navigation.replace('Auth')}
                     >
                         Log in
                     </Button>
