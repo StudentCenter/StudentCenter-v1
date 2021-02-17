@@ -64,7 +64,7 @@ function SplashScreen({navigation}) {
                     style={{
                         position: 'absolute',
                         bottom: wp('-50%'),
-                        fontWeight: '500'
+                        fontWeight: 'bold'
                     }}
                 >
                     App ver 1.1 beta

@@ -17,7 +17,6 @@ function HeaderApp({navigation, previous}) {
               <Appbar.BackAction
               onPress={navigation.goBack}
               color={paperTheme.colors.text}
-              useNativeDriver={true}
              />
               <Text
                 style={{
