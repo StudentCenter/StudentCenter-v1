@@ -5,7 +5,6 @@ import {
  } from 'react-native';
 import {
     ProgressBar,
-    Colors,
     Text,
  } from 'react-native-paper';
 import {
@@ -19,7 +18,7 @@ function SplashScreen({navigation}) {
     const fetchLoginData = async () => {
         try {
             const data = await AsyncStorage.getItem('user_name').then((value) => navigation.replace(
-                value === null ? 'Auth' : 'Landing'
+                value === null ? 'LandingScreen' : 'Landing'
             ))
             console.log(data)
         } catch (error) {
