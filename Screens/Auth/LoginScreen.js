@@ -1,13 +1,15 @@
 import * as React from 'react';
 import { 
-    Text,
     View,
     StyleSheet,
-    TouchableOpacity
+    TouchableOpacity,
+    Image
  } from 'react-native';
 import { 
     TextInput,
-    Button
+    Button,
+    Text,
+    useTheme
  } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
@@ -21,6 +23,7 @@ function LoginScreen({navigation}) {
     const [username, setUsername] = React.useState('')
     const [password, setPassword] = React.useState('')
     const API_URL = `http://localhost:8000`;
+    const paperTheme = useTheme()
 
     const handleShow = () => {
         setShowPassword(!showpassword)
@@ -77,56 +80,142 @@ function LoginScreen({navigation}) {
     const styles = StyleSheet.create({
         passwordcontainer: {
             flexDirection: 'row',
+            marginTop: wp('5%'),
+            marginLeft: wp('5%')
         },
         iconpassword: {
            position: 'absolute',
-           marginLeft: wp('90%'),
+           marginLeft: wp('80%'),
            marginTop: wp('8%')
         },
         inputpassword: {
-            width: wp('100%'),
+            width: wp('90%'),
             height: hp('10%'),
+            backgroundColor: paperTheme.colors.title,
+            fontWeight: 'bold',
         }
     })
 
-
     return(
         <>
-            <Text>
-                this login screen
-            </Text>
-            <TextInput
-                label='username'    
-                placeholder='johndoe'
-                onChangeText={(username) => setUsername(username)}
-            />
-            <View style={styles.passwordcontainer}>
-                <TextInput
-                    label='password'
-                    secureTextEntry={showpassword}
-                    style={styles.inputpassword}
-                    onChangeText={(password) => setPassword(password)}
-                    placeholder='12345***'
-                />
-                <TouchableOpacity
-                    onPress={handleShow}
-                    style={styles.iconpassword}
-                >
-                {showpassword 
-                    ?
-                    <MaterialCommunityIcons name='eye' size={wp('5%')} />
-                    :
-                    <MaterialCommunityIcons name='eye-off' size={wp('5%')} />
-                }
-                </TouchableOpacity>
-            </View>
-            
-            <Button
-                onPress={() => handleLogin()}
-                mode='contained'
+            <View
+                style={{
+                    marginTop: wp('15%'),
+                    marginLeft: wp('5%')
+                }}
             >
-                Login
-            </Button>
+                <Text
+                    style={{
+                        color: 'white',
+                        fontSize: wp('8%'),
+                        fontWeight: 'bold'
+                    }}
+                >
+                Welcome 
+                </Text>
+                <Text
+                    style={{
+                        color: 'white',
+                        fontSize: wp('8%'),
+                        fontWeight: 'bold'
+                    }}
+                >
+                Back, 
+                </Text>
+                <Text
+                    style={{
+                        color: 'white',
+                        fontSize: wp('8%'),
+                        fontWeight: 'bold'
+                    }}
+                >
+                People
+                </Text>
+            </View>
+                <View
+                    style={{
+                        position: 'absolute',
+                        bottom: 150,
+                        zIndex: 5,
+                    }}
+                >
+                <TextInput
+                    mode='flat'
+                    label='username'    
+                    placeholder='johndoe'
+                    onChangeText={(username) => setUsername(username)}
+                    underlineColor='#2F80ED'
+                    selectionColor='#2F80ED'
+                    style={{
+                        width: wp('90%'),
+                        height: hp('10%'),
+                        backgroundColor: paperTheme.colors.title,
+                        marginLeft: wp('5%'),
+                        fontWeight: 'bold',
+                    }}
+                />
+                <View style={styles.passwordcontainer}>
+                    <TextInput
+                        label='password'
+                        secureTextEntry={showpassword}
+                        style={styles.inputpassword}
+                        onChangeText={(password) => setPassword(password)}
+                        placeholder='12345***'
+                        underlineColor='#2F80ED'
+                        selectionColor='#2F80ED'
+                    />
+                    <TouchableOpacity
+                        onPress={handleShow}
+                        style={styles.iconpassword}
+                    >
+                    {showpassword 
+                        ?
+                        <MaterialCommunityIcons name='eye' size={wp('5%')} />
+                        :
+                        <MaterialCommunityIcons name='eye-off' size={wp('5%')} />
+                    }
+                    </TouchableOpacity>
+                </View>
+                <Text
+                    style={{
+                        color: '#2F80ED',
+                        marginTop: wp('3%'),
+                        fontWeight: 'bold',
+                        right: -230
+                    }}
+                >
+                    Forgot Password?
+                </Text>
+            </View>
+                <Button
+                    onPress={() => handleLogin()}
+                    mode='contained'
+                    style={{
+                        borderRadius: 10,
+                        width: wp('90%'),
+                        height: hp('8.5%'),
+                        backgroundColor: paperTheme.colors.backgroundauth,
+                        alignContent: 'center',
+                        position: 'absolute',
+                        zIndex: 2,
+                        marginLeft: wp('5%'),
+                        bottom: 20
+                        
+                    }}
+                    labelStyle={{
+                        color: 'white',
+                        marginTop: wp('5%'), 
+                        fontWeight: 'bold' 
+                    }}
+                >
+                    Login
+                </Button>
+            <Image
+                source={require('../../Asset/Image/gelombang.png')}
+                style={{
+                    bottom: wp('-20%'),
+                }}
+            />
         </>
     )
 }

@@ -41,7 +41,8 @@ function App() {
       backgroundmodal: '#FFFFFF',
       textinput: '#EEEEEE',
       title: '#FFFFFF',
-      subtitle: '#CFCFCF'
+      subtitle: '#CFCFCF',
+      backgroundauth: '#2F80ED'
     },
   };
 
@@ -57,7 +58,8 @@ function App() {
       backgroundmodal: '#2B2B2B',
       textinput: '#2B2B2B',
       title: '#000000',
-      subtitle: '#CFCFCF'
+      subtitle: '#CFCFCF',
+      backgroundauth: '#000000'
     },
   };
 
@@ -95,7 +97,9 @@ function App() {
               <Stack.Screen
                 name='Auth'
                 component={Auth}
-                options={{headerShown: false}}
+                options={{
+                  headerShown: false
+                }}
               />
               <Stack.Screen
                 name='Landing'
