@@ -15,20 +15,6 @@ import {
 
 function LandingScreen({navigation}) {
     const paperTheme = useTheme()
-    const fetchLoginData = async () => {
-        try {
-            const data = await AsyncStorage.getItem('user_name').then((value) => navigation.replace(
-                value === null ? 'Auth' : 'Landing'
-            ))
-            console.log(data)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    React.useEffect(() => {
-        fetchLoginData()
-    })
 
     return(
         <>
