@@ -23,6 +23,7 @@ import {AuthContext} from './components/context';
 import SplashScreen from './Screens/SplashScreen';
 import Auth from './Screens/Route/Auth';
 import DrawerNavigation from './Screens/Route/DrawerNavigation';
+import LandingScreen from './Screens/LandingScreen';
 
 function App() {
   const Stack = createStackNavigator();
@@ -38,7 +39,9 @@ function App() {
       background: '#FFFFFF',
       text: '#000000',
       backgroundmodal: '#FFFFFF',
-      textinput: '#EEEEEE'
+      textinput: '#EEEEEE',
+      title: '#FFFFFF',
+      subtitle: '#CFCFCF'
     },
   };
 
@@ -52,7 +55,9 @@ function App() {
       background: '#121212',
       text: '#FFFFFF',
       backgroundmodal: '#2B2B2B',
-      textinput: '#2B2B2B'
+      textinput: '#2B2B2B',
+      title: '#000000',
+      subtitle: '#CFCFCF'
     },
   };
 
@@ -78,6 +83,14 @@ function App() {
                 name='SplashScreen'
                 component={SplashScreen}
                 options={{headerShown: false}}
+              />
+              <Stack.Screen
+                name='LandingScreen'
+                component={LandingScreen}
+                options={{
+                  headerShown: false,
+                  cardStyle: {backgroundColor: '#2F80ED'}
+                }}
               />
               <Stack.Screen
                 name='Auth'

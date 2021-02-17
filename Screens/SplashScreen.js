@@ -1,17 +1,24 @@
 import * as React from 'react';
 import { 
-    Text,
+    Image,
+    View,
  } from 'react-native';
-import { 
-    Button
+import {
+    ProgressBar,
+    Text,
  } from 'react-native-paper';
+import {
+    widthPercentageToDP as wp,
+    heightPercentageToDP as hp,
+ } from 'react-native-responsive-screen';
 import AsyncStorage from '@react-native-community/async-storage';
 
 function SplashScreen({navigation}) {
+    const [progress, setProgress] = React.useState(0.1)
     const fetchLoginData = async () => {
         try {
             const data = await AsyncStorage.getItem('user_name').then((value) => navigation.replace(
-                value === null ? 'Auth' : 'Landing'
+                value === null ? 'LandingScreen' : 'Landing'
             ))
             console.log(data)
         } catch (error) {
@@ -20,21 +27,49 @@ function SplashScreen({navigation}) {
     }
 
     React.useEffect(() => {
-        fetchLoginData()
+        setTimeout(() => {
+            if (progress < 1) {
+                setProgress(progress + 0.1)
+            } else {
+                fetchLoginData()
+            }
+        }, 500)
     })
 
     return(
         <>
-        <Text>
-            Hii People!
-        </Text>
-        <Button
-            onPress={() => navigation.navigate('Auth')}
-            mode='contained'
-        >
-            Login
-        </Button>
-        
+            <View
+                style={{
+                    alignItems: 'center',
+                }}
+            >
+                <Image
+                    source={require('../Asset/Image/student.gif')}
+                    style={{
+                        width: wp('70%'),
+                        height: hp('40'),
+                        marginTop: wp('20%')
+                    }}
+                />
+                <ProgressBar
+                    progress={progress}
+                    color='#2F80ED'
+                    style={{
+                        marginTop: '20%',
+                        width: wp('50'),
+                        borderRadius: 20
+                    }}
+                />
+                <Text
+                    style={{
+                        position: 'absolute',
+                        bottom: wp('-50%'),
+                        fontWeight: '500'
+                    }}
+                >
+                    App ver 1.1 beta
+                </Text>
+            </View>
         </>
     )
 }
