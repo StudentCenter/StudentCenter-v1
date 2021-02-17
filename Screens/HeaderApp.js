@@ -14,8 +14,6 @@ function HeaderApp({navigation, previous}) {
         <Appbar.Header style={{backgroundColor: 'transparent'}}>
           {previous ? 
             <>
-           
-            
               <Appbar.BackAction
               onPress={navigation.goBack}
               color={paperTheme.colors.text}

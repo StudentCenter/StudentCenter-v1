@@ -104,14 +104,14 @@ const DetailSiswa = ({route}) => {
                     ]}
                     icon={({size}) => (
                         <Image
-                        source={{
-                            uri: 'https://img.icons8.com/ios-filled/48/000000/break--v1.png',
-                        }}
-                        style={{
-                            width: size,
-                            height: size,
-                            tintColor: 'red'
-                        }}
+                            source={{
+                                uri: 'https://img.icons8.com/ios-filled/48/000000/break--v1.png',
+                            }}
+                            style={{
+                                width: size,
+                                height: size,
+                                tintColor: 'red'
+                            }}
                         />
                     )}>
                    If you want to edit this data, please report it to admin.
@@ -209,10 +209,10 @@ const DetailSiswa = ({route}) => {
     } else {
         return(
             <ActivityIndicator 
-            animating={true} 
-            size={40}
-            color="#345EF0" 
-            style={styles.loading} 
+                animating={true} 
+                size={40}
+                color="#345EF0" 
+                style={styles.loading} 
             />
         )
     }
