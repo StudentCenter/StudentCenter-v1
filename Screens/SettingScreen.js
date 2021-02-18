@@ -9,7 +9,13 @@ import {
   TouchableOpacity,
   Switch,
 } from 'react-native';
-import {Card, useTheme} from 'react-native-paper';
+import {
+  Card, 
+  useTheme,
+  Modal,
+  Portal,
+  ActivityIndicator
+} from 'react-native-paper';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -21,11 +27,17 @@ import AsyncStorage from '@react-native-community/async-storage';
 const SettingScreen = ({navigation}) => {
   const paperTheme = useTheme();
   const {toggleTheme} = React.useContext(AuthContext);
-  console.log(navigation)
+  const [loading, setLoading] = React.useState(false)
 
   const fetchLogout = async () => {
+    if (loading === false) {
+      setLoading(true)
+    }
+
     try {
       const data = await AsyncStorage.clear().then(() => {
+        setLoading(false)
+      }).then(() => {
         navigation.replace('Auth')
       })
     } catch (error) {
@@ -34,6 +46,7 @@ const SettingScreen = ({navigation}) => {
   }
   
   return (
+    <>
     <ScrollView>
       <View style={styles.container}>
         {/* Box 1 */}
@@ -157,6 +170,30 @@ const SettingScreen = ({navigation}) => {
         </Text>
       </View>
     </ScrollView>
+
+    {/* modal loading */}
+      <Portal>
+        <Modal
+                visible={loading}
+                contentContainerStyle={{
+                    backgroundColor: 'white',
+                    padding: 20,
+                    width: wp('50%'),
+                    height: hp('30%'),
+                    borderRadius: 20,
+                    marginLeft: wp('25%'),
+                    
+                }}
+            >
+                <ActivityIndicator 
+                    animating={true} 
+                    color="#345EF0" 
+                    size={40}
+                    style={styles.loading} 
+                />
+        </Modal>
+    </Portal>
+  </>
   );
 };
 
