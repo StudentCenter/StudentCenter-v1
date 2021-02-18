@@ -176,7 +176,7 @@ const SettingScreen = ({navigation}) => {
         <Modal
                 visible={loading}
                 contentContainerStyle={{
-                    backgroundColor: 'white',
+                    backgroundColor: paperTheme.colors.backgroundmodal,
                     padding: 20,
                     width: wp('50%'),
                     height: hp('30%'),

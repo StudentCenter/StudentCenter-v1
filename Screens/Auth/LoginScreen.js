@@ -176,7 +176,7 @@ function LoginScreen({navigation}) {
                     style={{
                         width: wp('90%'),
                         height: hp('10%'),
-                        backgroundColor: 'transparent',
+                        backgroundColor: paperTheme.colors.title,
                         marginLeft: wp('5%'),
                         marginTop: wp('70%'),
                         fontWeight: 'bold',
@@ -251,7 +251,7 @@ function LoginScreen({navigation}) {
                 <Modal
                         visible={loading}
                         contentContainerStyle={{
-                            backgroundColor: 'white',
+                            backgroundColor: paperTheme.colors.backgroundmodal,
                             padding: 20,
                             width: wp('50%'),
                             height: hp('30%'),

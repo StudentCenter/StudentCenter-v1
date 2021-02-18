@@ -1,13 +1,6 @@
 <h1 align="center">
-  <a href="https://reactnative.dev/">
-    React Native
-  </a>
+  Student Center APP
 </h1>
-
-<p align="center">
-  <strong>Learn once, write anywhere:</strong><br>
-  Build mobile apps with React.
-</p>
 
 <p align="center">
   <a href="https://github.com/facebook/react-native/blob/master/LICENSE">
@@ -27,32 +20,13 @@
   </a>
 </p>
 
-<h3 align="center">
-  <a href="https://reactnative.dev/docs/getting-started">Getting Started</a>
-  <span> · </span>
-  <a href="https://reactnative.dev/docs/tutorial">Learn the Basics</a>
-  <span> · </span>
-  <a href="https://reactnative.dev/showcase.html">Showcase</a>
-  <span> · </span>
-  <a href="https://reactnative.dev/docs/contributing">Contribute</a>
-  <span> · </span>
-  <a href="https://reactnative.dev/help">Community</a>
-  <span> · </span>
-  <a href="https://github.com/facebook/react-native/blob/master/.github/SUPPORT.md">Support</a>
-</h3>
+## 📷 ScreenShoot Apps
 
-React Native brings [**React**'s][r] declarative UI framework to iOS and Android. With React Native, you use native UI controls and have full access to the native platform.
+### 💡 Light Mode
+<img src='./Asset/Image/lightmode.png' />
 
-- **Declarative.** React makes it painless to create interactive UIs. Declarative views make your code more predictable and easier to debug.
-- **Component-Based.** Build encapsulated components that manage their state, then compose them to make complex UIs.
-- **Developer Velocity.** See local changes in seconds. Changes to JavaScript code can be live reloaded without rebuilding the native app.
-- **Portability.** Reuse code across iOS, Android, and [other platforms][p].
-
-React Native is developed and supported by many companies and individual core contributors. Find out more in our [ecosystem overview][e].
-
-[r]: https://reactjs.org/
-[p]: https://reactnative.dev/docs/out-of-tree-platforms
-[e]: https://github.com/facebook/react-native/blob/master/ECOSYSTEM.md
+### 🌒 Dark Mode
+<img src='./Asset/Image/darkmodee.png' />
 
 ## Contents
 
