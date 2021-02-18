@@ -9,7 +9,10 @@ import {
     TextInput,
     Button,
     Text,
-    useTheme
+    useTheme,
+    Modal,
+    ActivityIndicator,
+    Portal
  } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
@@ -24,19 +27,26 @@ function LoginScreen({navigation}) {
     const [password, setPassword] = React.useState('')
     const API_URL = `http://localhost:8000`;
     const paperTheme = useTheme()
+    const [loading, setLoading] = React.useState(false)
 
     const handleShow = () => {
         setShowPassword(!showpassword)
     }
     
     const fetchLogin = async () => {
+        // set loading to true
+        if (loading === false) {
+            setLoading(true)
+        }
+
+        // get validation
         if (!username) {
             alert('Please Fill Username First')
         }
-
         if (!password) {
             alert('Please Fill Password First')
         }
+
         try {
             let dataToSend = {username: username, password: password};
             let formBody = [];
@@ -60,6 +70,10 @@ function LoginScreen({navigation}) {
             const setItemUser = await AsyncStorage.setItem('user_name', resp.result.username)
             console.log(setItemUser)
             if (resp.message === 'login_success') {
+                 // set loading to false
+                if (loading === true) {
+                    setLoading(false)
+                }
                 console.log(resp.result.username)
                 navigation.replace('Landing')
             } else {
@@ -80,8 +94,10 @@ function LoginScreen({navigation}) {
     const styles = StyleSheet.create({
         passwordcontainer: {
             flexDirection: 'row',
-            marginTop: wp('5%'),
-            marginLeft: wp('5%')
+            marginTop: wp('90%'),
+            marginLeft: wp('5%'),
+            position: 'absolute',
+            zIndex: 2,
         },
         iconpassword: {
            position: 'absolute',
@@ -98,62 +114,77 @@ function LoginScreen({navigation}) {
 
     return(
         <>
-            <View
-                style={{
-                    marginTop: wp('15%'),
-                    marginLeft: wp('5%')
-                }}
-            >
-                <Text
-                    style={{
-                        color: 'white',
-                        fontSize: wp('8%'),
-                        fontWeight: 'bold'
-                    }}
-                >
-                Welcome 
-                </Text>
-                <Text
-                    style={{
-                        color: 'white',
-                        fontSize: wp('8%'),
-                        fontWeight: 'bold'
-                    }}
-                >
-                Back, 
-                </Text>
-                <Text
-                    style={{
-                        color: 'white',
-                        fontSize: wp('8%'),
-                        fontWeight: 'bold'
-                    }}
-                >
-                People
-                </Text>
-            </View>
+                {/* view */}
                 <View
                     style={{
-                        position: 'absolute',
-                        bottom: 150,
-                        zIndex: 5,
+                        marginTop: wp('10%'),
+                        marginLeft: wp('5%')
                     }}
                 >
+                    <Text
+                        style={{
+                            color: 'white',
+                            fontSize: wp('8%'),
+                            fontWeight: 'bold'
+                        }}
+                    >
+                    Welcome 
+                    </Text>
+                    <Text
+                        style={{
+                            color: 'white',
+                            fontSize: wp('8%'),
+                            fontWeight: 'bold'
+                        }}
+                    >
+                    Back, 
+                    </Text>
+                    <View
+                        style={{
+                            flexDirection: 'row'
+                        }}
+                    >
+                        <Text
+                            style={{
+                                color: 'white',
+                                fontSize: wp('8%'),
+                                fontWeight: 'bold'
+                            }}
+                        >
+                        People
+                        </Text>
+                        <Image
+                            source={require('../../Asset/Image/login.png')}
+                            style={{
+                                width: wp('50%'),
+                                height: hp('20%'),
+                                position: 'absolute',
+                                top: wp('-20%'),
+                                right: 0
+                            }}
+                        />
+                    </View>
+                </View>
+
+                {/* Username */}
                 <TextInput
                     mode='flat'
                     label='username'    
                     placeholder='johndoe'
                     onChangeText={(username) => setUsername(username)}
                     underlineColor='#2F80ED'
-                    selectionColor='#2F80ED'
                     style={{
                         width: wp('90%'),
                         height: hp('10%'),
-                        backgroundColor: paperTheme.colors.title,
+                        backgroundColor: 'transparent',
                         marginLeft: wp('5%'),
+                        marginTop: wp('70%'),
                         fontWeight: 'bold',
+                        position: 'absolute',
+                        zIndex: 2,
                     }}
                 />
+                {/* Password */}
                 <View style={styles.passwordcontainer}>
                     <TextInput
                         label='password'
@@ -162,7 +193,6 @@ function LoginScreen({navigation}) {
                         onChangeText={(password) => setPassword(password)}
                         placeholder='12345***'
                         underlineColor='#2F80ED'
-                        selectionColor='#2F80ED'
                     />
                     <TouchableOpacity
                         onPress={handleShow}
@@ -179,32 +209,31 @@ function LoginScreen({navigation}) {
                 <Text
                     style={{
                         color: '#2F80ED',
-                        marginTop: wp('3%'),
+                        top: wp('70%'),
                         fontWeight: 'bold',
-                        right: -230
+                        right: wp('-63%'),
+                        position: 'relative',
+                        zIndex: 2                      
                     }}
                 >
                     Forgot Password?
                 </Text>
-            </View>
                 <Button
                     onPress={() => handleLogin()}
                     mode='contained'
                     style={{
                         borderRadius: 10,
                         width: wp('90%'),
-                        height: hp('8.5%'),
+                        padding: wp('2%'),
                         backgroundColor: paperTheme.colors.backgroundauth,
                         alignContent: 'center',
-                        position: 'absolute',
+                        position: 'relative',
                         zIndex: 2,
                         marginLeft: wp('5%'),
-                        bottom: 20
-                        
+                        bottom: wp('-110%')
                     }}
                     labelStyle={{
                         color: 'white',
-                        marginTop: wp('5%'), 
                         fontWeight: 'bold' 
                     }}
                 >
@@ -213,9 +242,32 @@ function LoginScreen({navigation}) {
             <Image
                 source={require('../../Asset/Image/gelombang.png')}
                 style={{
-                    bottom: wp('-20%'),
+                    bottom: wp('5%'),
                 }}
             />
+            
+            {/* modal loading */}
+            <Portal>
+                <Modal
+                        visible={loading}
+                        contentContainerStyle={{
+                            backgroundColor: 'white',
+                            padding: 20,
+                            width: wp('50%'),
+                            height: hp('30%'),
+                            borderRadius: 20,
+                            marginLeft: wp('25%'),
+                            
+                        }}
+                    >
+                        <ActivityIndicator 
+                            animating={true} 
+                            color="#345EF0" 
+                            size={40}
+                            style={styles.loading} 
+                        />
+                </Modal>
+            </Portal>
         </>
     )
 }
