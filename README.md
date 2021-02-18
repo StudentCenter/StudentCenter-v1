@@ -1,13 +1,6 @@
 <h1 align="center">
-  <a href="https://reactnative.dev/">
-    React Native
-  </a>
+  Student Center APP
 </h1>
-
-<p align="center">
-  <strong>Learn once, write anywhere:</strong><br>
-  Build mobile apps with React.
-</p>
 
 <p align="center">
   <a href="https://github.com/facebook/react-native/blob/master/LICENSE">
@@ -27,19 +20,12 @@
   </a>
 </p>
 
-<h3 align="center">
-  <a href="https://reactnative.dev/docs/getting-started">Getting Started</a>
-  <span> · </span>
-  <a href="https://reactnative.dev/docs/tutorial">Learn the Basics</a>
-  <span> · </span>
-  <a href="https://reactnative.dev/showcase.html">Showcase</a>
-  <span> · </span>
-  <a href="https://reactnative.dev/docs/contributing">Contribute</a>
-  <span> · </span>
-  <a href="https://reactnative.dev/help">Community</a>
-  <span> · </span>
-  <a href="https://github.com/facebook/react-native/blob/master/.github/SUPPORT.md">Support</a>
-</h3>
+## 📖 Documentation Apps
+
+### Light Mode
+<img src='./Asset/Image/lightmode.png' />
+
+
 
 React Native brings [**React**'s][r] declarative UI framework to iOS and Android. With React Native, you use native UI controls and have full access to the native platform.
 
