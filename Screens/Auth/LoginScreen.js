@@ -3,7 +3,8 @@ import {
     View,
     StyleSheet,
     TouchableOpacity,
-    Image
+    Image,
+    ScrollView
  } from 'react-native';
 import { 
     TextInput,
@@ -42,9 +43,11 @@ function LoginScreen({navigation}) {
         // get validation
         if (!username) {
             alert('Please Fill Username First')
+            setLoading(false)
         }
         if (!password) {
             alert('Please Fill Password First')
+            setLoading(false)
         }
 
         try {
@@ -79,10 +82,12 @@ function LoginScreen({navigation}) {
             } else {
                 console.log('Please check your username or password')
                 alert('Your username or password is not correct!')
+                setLoading(false)
             }
         } catch (error) {
-            alert(error)
+            alert('Something Error!')
             console.log(error)
+            setLoading(false)
         }
     }
 
@@ -94,8 +99,8 @@ function LoginScreen({navigation}) {
     const styles = StyleSheet.create({
         passwordcontainer: {
             flexDirection: 'row',
-            marginTop: wp('90%'),
-            marginLeft: wp('5%'),
+            top: wp('115%'),
+            left: wp('5%'),
             position: 'absolute',
             zIndex: 2,
         },
@@ -114,34 +119,13 @@ function LoginScreen({navigation}) {
 
     return(
         <>
-                {/* view */}
-                <View
-                    style={{
-                        marginTop: wp('10%'),
-                        marginLeft: wp('5%')
-                    }}
-                >
-                    <Text
-                        style={{
-                            color: 'white',
-                            fontSize: wp('8%'),
-                            fontWeight: 'bold'
-                        }}
-                    >
-                    Welcome 
-                    </Text>
-                    <Text
-                        style={{
-                            color: 'white',
-                            fontSize: wp('8%'),
-                            fontWeight: 'bold'
-                        }}
-                    >
-                    Back, 
-                    </Text>
+            <ScrollView>
+
+                    {/* view */}
                     <View
                         style={{
-                            flexDirection: 'row'
+                            marginTop: wp('10%'),
+                            marginLeft: wp('5%')
                         }}
                     >
                         <Text
@@ -151,123 +135,147 @@ function LoginScreen({navigation}) {
                                 fontWeight: 'bold'
                             }}
                         >
-                        People
+                        Welcome 
                         </Text>
-                        <Image
-                            source={require('../../Asset/Image/login.png')}
+                        <Text
                             style={{
-                                width: wp('50%'),
-                                height: hp('20%'),
-                                position: 'absolute',
-                                top: wp('-20%'),
-                                right: 0
+                                color: 'white',
+                                fontSize: wp('8%'),
+                                fontWeight: 'bold'
                             }}
-                        />
+                        >
+                        Back, 
+                        </Text>
+                        <View
+                            style={{
+                                flexDirection: 'row'
+                            }}
+                        >
+                            <Text
+                                style={{
+                                    color: 'white',
+                                    fontSize: wp('8%'),
+                                    fontWeight: 'bold'
+                                }}
+                            >
+                            People
+                            </Text>
+                            <Image
+                                source={require('../../Asset/Image/login.png')}
+                                style={{
+                                    width: wp('50%'),
+                                    height: hp('20%'),
+                                    position: 'absolute',
+                                    top: wp('-20%'),
+                                    right: 0
+                                }}
+                            />
+                        </View>
                     </View>
-                </View>
 
-                {/* Username */}
-                <TextInput
-                    mode='flat'
-                    label='username'    
-                    placeholder='johndoe'
-                    onChangeText={(username) => setUsername(username)}
-                    underlineColor='#2F80ED'
-                    style={{
-                        width: wp('90%'),
-                        height: hp('10%'),
-                        backgroundColor: paperTheme.colors.title,
-                        marginLeft: wp('5%'),
-                        marginTop: wp('70%'),
-                        fontWeight: 'bold',
-                        position: 'absolute',
-                        zIndex: 2,
-                    }}
-                />
-                {/* Password */}
-                <View style={styles.passwordcontainer}>
+                    {/* Username */}
                     <TextInput
-                        label='password'
-                        secureTextEntry={showpassword}
-                        style={styles.inputpassword}
-                        onChangeText={(password) => setPassword(password)}
-                        placeholder='12345***'
+                        mode='flat'
+                        label='username'    
+                        placeholder='johndoe'
+                        onChangeText={(username) => setUsername(username)}
                         underlineColor='#2F80ED'
+                        style={{
+                            width: wp('90%'),
+                            height: hp('10%'),
+                            backgroundColor: paperTheme.colors.title,
+                            top: wp('90%'),
+                            left: wp('5%'),
+                            fontWeight: 'bold',
+                            position: 'absolute',
+                            zIndex: 2,
+                        }}
                     />
-                    <TouchableOpacity
-                        onPress={handleShow}
-                        style={styles.iconpassword}
-                    >
-                    {showpassword 
-                        ?
-                        <MaterialCommunityIcons name='eye' size={wp('5%')} />
-                        :
-                        <MaterialCommunityIcons name='eye-off' size={wp('5%')} />
-                    }
-                    </TouchableOpacity>
-                </View>
-                <Text
-                    style={{
-                        color: '#2F80ED',
-                        top: wp('70%'),
-                        fontWeight: 'bold',
-                        right: wp('-63%'),
-                        position: 'relative',
-                        zIndex: 2                      
-                    }}
-                >
-                    Forgot Password?
-                </Text>
-                <Button
-                    onPress={() => handleLogin()}
-                    mode='contained'
-                    style={{
-                        borderRadius: 10,
-                        width: wp('90%'),
-                        padding: wp('2%'),
-                        backgroundColor: paperTheme.colors.backgroundauth,
-                        alignContent: 'center',
-                        position: 'relative',
-                        zIndex: 2,
-                        marginLeft: wp('5%'),
-                        bottom: wp('-110%')
-                    }}
-                    labelStyle={{
-                        color: 'white',
-                        fontWeight: 'bold' 
-                    }}
-                >
-                    Login
-                </Button>
-            <Image
-                source={require('../../Asset/Image/gelombang.png')}
-                style={{
-                    bottom: wp('5%'),
-                }}
-            />
-            
-            {/* modal loading */}
-            <Portal>
-                <Modal
-                        visible={loading}
-                        contentContainerStyle={{
-                            backgroundColor: paperTheme.colors.backgroundmodal,
-                            padding: 20,
-                            width: wp('50%'),
-                            height: hp('30%'),
-                            borderRadius: 20,
-                            marginLeft: wp('25%'),
-                            
+                    {/* Password */}
+                    <View style={styles.passwordcontainer}>
+                        <TextInput
+                            label='password'
+                            secureTextEntry={showpassword}
+                            style={styles.inputpassword}
+                            onChangeText={(password) => setPassword(password)}
+                            placeholder='12345***'
+                            underlineColor='#2F80ED'
+                        />
+                        <TouchableOpacity
+                            onPress={handleShow}
+                            style={styles.iconpassword}
+                        >
+                        {showpassword 
+                            ?
+                            <MaterialCommunityIcons name='eye' size={wp('5%')} />
+                            :
+                            <MaterialCommunityIcons name='eye-off' size={wp('5%')} />
+                        }
+                        </TouchableOpacity>
+                    </View>
+                    <Text
+                        style={{
+                            color: '#2F80ED',
+                            top: 500,
+                            left: wp('59%'),
+                            fontWeight: 'bold',
+                            position: 'absolute',
+                            zIndex: 2                    
                         }}
                     >
-                        <ActivityIndicator 
-                            animating={true} 
-                            color="#345EF0" 
-                            size={40}
-                            style={styles.loading} 
-                        />
-                </Modal>
-            </Portal>
+                        Forgot Password?
+                    </Text>
+                    <Button
+                        onPress={() => handleLogin()}
+                        mode='contained'
+                        style={{
+                            borderRadius: 10,
+                            width: wp('90%'),
+                            padding: wp('2%'),
+                            backgroundColor: paperTheme.colors.backgroundauth,
+                            alignContent: 'center',
+                            position: 'absolute',
+                            zIndex: 2,
+                            marginLeft: wp('5%'),
+                            bottom: 30
+                        }}
+                        labelStyle={{
+                            color: 'white',
+                            fontWeight: 'bold' 
+                        }}
+                    >
+                        Login
+                    </Button>
+                <Image
+                    source={require('../../Asset/Image/gelombang.png')}
+                    style={{
+                        marginTop: wp('20%')
+                    }}
+                />
+                
+                {/* modal loading */}
+                <Portal>
+                    <Modal
+                            visible={loading}
+                            contentContainerStyle={{
+                                backgroundColor: paperTheme.colors.backgroundmodal,
+                                padding: 20,
+                                width: wp('50%'),
+                                height: hp('30%'),
+                                borderRadius: 20,
+                                marginLeft: wp('25%'),
+                                
+                            }}
+                        >
+                            <ActivityIndicator 
+                                animating={true} 
+                                color="#345EF0" 
+                                size={40}
+                                style={styles.loading} 
+                            />
+                    </Modal>
+                </Portal>
+            </ScrollView>
         </>
     )
 }

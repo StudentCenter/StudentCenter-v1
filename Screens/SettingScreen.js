@@ -44,6 +44,16 @@ const SettingScreen = ({navigation}) => {
       console.log(error)
     }
   }
+
+  const handleDarkMode = () => {
+    if (loading === false) {
+      setLoading(true)
+      setTimeout(() => {
+        toggleTheme()
+        setLoading(false)
+      }, 1000)
+    }
+  }
   
   return (
     <>
@@ -91,11 +101,10 @@ const SettingScreen = ({navigation}) => {
               }}
               value={paperTheme.dark}
               onValueChange={() => {
-                toggleTheme();
+                handleDarkMode();
               }}
               thumbColor={paperTheme.dark ? '#ffffff' : '#000000'}
               trackColor={{false: '#B2B2B2', true: '#000000'}}
-              useNativeDriver={true}
             />
           </View>
 

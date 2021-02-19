@@ -24,6 +24,7 @@
     "react-native-calendars": "^1.1249.0",
     "react-native-datepicker": "^1.7.2",
     "react-native-gesture-handler": "^1.9.0",
+    "react-native-indicators": "^0.17.0",
     "react-native-modal": "^11.6.1",
     "react-native-paper": "^4.7.1",
     "react-native-reanimated": "^1.13.2",
