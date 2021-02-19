@@ -1,19 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import {View} from 'react-native';
-import {Text} from 'react-native-paper';
+import {Calendar} from 'react-native-calendars';
 
 const StudentAttandance = () => {
   return (
     <>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Text>Student Attandance</Text>
-      </View>
+      <Calendar
+        onDayPress={(day) => {console.log('selected day', day)}}
+        enableSwipeMonths={true}
+      />
     </>
   );
 };
