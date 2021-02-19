@@ -1,4 +1,3 @@
-/* eslint-disable no-shadow */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -42,7 +41,10 @@ function App() {
       textinput: '#EEEEEE',
       title: '#FFFFFF',
       subtitle: '#CFCFCF',
-      backgroundauth: '#2F80ED'
+      backgroundauth: '#2F80ED',
+      calendarBackground: '#FFFFFF',
+      calendarDay: '#333333',
+      calendarTitle: '#000000'
     },
   };
 
@@ -59,7 +61,10 @@ function App() {
       textinput: '#2B2B2B',
       title: '#000000',
       subtitle: '#CFCFCF',
-      backgroundauth: '#000000'
+      backgroundauth: '#000000',
+      calendarBackground: '#121212',
+      calendarDay: '#FFFFFF',
+      calendarTitle: '#FFFFFF'
     },
   };
 

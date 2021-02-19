@@ -1,19 +1,51 @@
-/* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import {View} from 'react-native';
-import {Text} from 'react-native-paper';
+import {Calendar} from 'react-native-calendars';
+import { 
+  Card,
+  useTheme
+} from 'react-native-paper';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 const StudentAttandance = () => {
+  const [markedDate, setMarkedDate] = React.useState('')
+  const paperTheme = useTheme()
+  const key = paperTheme.dark
+  console.log(key)
+
+  const getSelectedDay = day => {
+    setMarkedDate(day.dateString)
+  }
+
   return (
     <>
-      <View
+      <Calendar
+        key={key}
+        onDayPress={getSelectedDay}
+        enableSwipeMonths={true}
+        markedDates={{
+          [markedDate]: {
+            selected: true,
+            selectedColor: '#2F80ED',
+            selectedTextColor: 'white'
+          }
+        }}
         style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Text>Student Attandance</Text>
-      </View>
+          width: wp('95%'),
+          marginLeft: wp('2%'),
+        }}
+        theme={{
+          calendarBackground: paperTheme.colors.calendarBackground,
+          dayTextColor: paperTheme.colors.calendarDay,
+          monthTextColor: paperTheme.colors.calendarTitle,
+          
+        }}
+      />
+      <Card>
+
+      </Card>
     </>
   );
 };

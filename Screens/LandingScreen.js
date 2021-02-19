@@ -55,8 +55,7 @@ function LandingScreen({navigation}) {
                 </Text>
                 <View
                     style={{
-                        position: 'absolute',
-                        bottom: wp('-35%'),
+                        marginTop: wp('10%'),
                         backgroundColor: '#C4C4C4',
                         borderRadius: 15,
                         flexDirection: 'row'
@@ -67,13 +66,12 @@ function LandingScreen({navigation}) {
                         style={{
                             backgroundColor: 'white',
                             borderRadius: 15,
-                            width: wp('40%'),
-                            height: hp('8%')
+                            padding: wp('2%'),
+                            width: wp('40%')
                         }}
                         labelStyle={{
                             fontWeight: 'bold',
                             color: '#2F80ED',
-                            marginTop: wp('5%')
                         }}
                         onPress={() => navigation.replace('Auth')}
                     >
@@ -81,12 +79,12 @@ function LandingScreen({navigation}) {
                     </Button>
                     <Button
                         style={{
-                            width: wp('40%')
+                            width: wp('40%'),
+                            padding: wp('2%'),
                         }}
                         labelStyle={{
                             fontWeight: 'bold',
                             color: 'white',
-                            marginTop: wp('5%')
                         }}
                     >
                         Faq
